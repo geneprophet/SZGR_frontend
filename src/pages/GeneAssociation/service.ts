@@ -23,7 +23,7 @@ const errorHandler = function (error: any) {
 };
 export const extendRequest = extend({ errorHandler });
 
-export const getRemoteGenecura = async ({
+export const getRemoteGenetwas = async ({
                                          pageSize,
                                          pageIndex,
                                       gene,
@@ -36,7 +36,7 @@ export const getRemoteGenecura = async ({
   sort_field: string | undefined;
   sort_direction: string | undefined;
 }) => {
-  return extendRequest(API_PREFIX + '/genecuration', {
+  return extendRequest(API_PREFIX + '/genetwas', {
     method: 'get',
     params: {
       pageSize: pageSize,
@@ -53,7 +53,7 @@ export const getRemoteGenecura = async ({
       return false;
     });
 };
-export const getRemoteGenecuraLike = async ({
+export const getRemoteGenetwasLike = async ({
                                              pageSize,
                                              pageIndex,
                                           gene,
@@ -66,7 +66,7 @@ export const getRemoteGenecuraLike = async ({
   sort_field: string | undefined;
   sort_direction: string | undefined;
 }) => {
-  return extendRequest(API_PREFIX + '/cmapsignaturelike', {
+  return extendRequest(API_PREFIX + '/genetwaslike', {
     method: 'get',
     params: {
       pageSize: pageSize,

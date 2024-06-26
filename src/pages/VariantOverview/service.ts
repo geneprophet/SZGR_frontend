@@ -95,3 +95,39 @@ export const getRemoteVariantLike = async ({
       return false;
     });
 };
+export const getRemoteVariantlocus = async ({
+                                         pageSize,
+                                         pageIndex,
+                                         vchr,
+                                         vs,
+                                         ve,
+                                         sort_field,
+                                         sort_direction
+                                       }: {
+  pageSize: number | undefined;
+  pageIndex: number | undefined;
+  vchr: string | undefined;
+  vs: string | undefined;
+  ve: string | undefined;
+  sort_field: string | undefined;
+  sort_direction: string | undefined;
+}) => {
+  return extendRequest(API_PREFIX + '/loccuration', {
+    method: 'get',
+    params: {
+      pageSize: pageSize,
+      pageIndex: pageIndex,
+      vchr: vchr,
+      vs: vs,
+      ve: ve,
+      sort_field:sort_field,
+      sort_direction:sort_direction
+    },
+  })
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      return false;
+    });
+};

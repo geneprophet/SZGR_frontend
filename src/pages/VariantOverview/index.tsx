@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from './index.less';
-import { getRemoteVariant, getRemoteVariantLike } from "@/pages/VariantOverview/service";
+import { getRemoteVariant, getRemoteVariantLike, getRemoteVariantlocus } from "@/pages/VariantOverview/service";
 import { ApartmentOutlined, SearchOutlined } from '@ant-design/icons';
 import { Parser } from 'json2csv';
 // @ts-ignore
@@ -75,20 +75,28 @@ export default function Page(props: any) {
           setTotal(res.meta.total);
         });
       } else{
-        getRemoteVariantLike({
-          pageSize: pagesize,
-          pageIndex: pageindex,
-          vid:undefined,
-          vtype:name,
-          pop:undefined,
-          sort_field:undefined,
-          sort_direction:undefined
-        }).then((res) => {
-          // console.log(res.data);
-          setLoading(false);
-          setVariants(res.data);
-          setTotal(res.meta.total);
-        });
+        let regex = /chr(\d+):([\d]+)-([\d]+)/;
+        let match = name.match(regex);
+        if (match){
+          let chromosome = match[1];
+          let start = match[2];
+          let end = match[3];
+          getRemoteVariantlocus({
+            pageSize: pagesize,
+            pageIndex: pageindex,
+            vchr:chromosome,
+            vs:start,
+            ve:end,
+            sort_field:undefined,
+            sort_direction:undefined
+          }).then((res) => {
+            // console.log(res.data);
+            setLoading(false);
+            setVariants(res.data);
+            setTotal(res.meta.total);
+          });
+        }
+
       }
     }
 
@@ -171,15 +179,15 @@ export default function Page(props: any) {
           </Select>
         );
       },
-      render: (text: string, record: any) => (
-        <span>
-          <a href={URL_PREFIX + '/variant/' + record.vtype}>
-            <Space style={{ fontWeight: 'bold' }}>
-              {record.vtype}
-            </Space>
-          </a>
-        </span>
-      ),
+      // render: (text: string, record: any) => (
+      //   <span>
+      //     <a href={URL_PREFIX + '/variant/' + record.vtype}>
+      //       <Space style={{ fontWeight: 'bold' }}>
+      //         {record.vtype}
+      //       </Space>
+      //     </a>
+      //   </span>
+      // ),
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Variant ID</strong>,
@@ -250,6 +258,19 @@ export default function Page(props: any) {
           </Select>
         );
       },
+      render: (text: string, record) => (
+        <span>
+          <a
+            className={styles.link}
+            href={URL_PREFIX + '/explorevariant/' + record.vid}
+            target={'_blank'}
+          >
+            <Space>
+              {record.vid}
+            </Space>
+          </a>
+        </span>
+      ),
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Locus</strong>,

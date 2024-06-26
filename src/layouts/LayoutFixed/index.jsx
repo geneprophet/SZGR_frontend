@@ -42,16 +42,10 @@ export default function (props) {
       setSelectkey('1');
     } else if (history.location.pathname.startsWith('/variant')) {
       setSelectkey('2');
-    } else if (history.location.pathname.startsWith('/CV')) {
-      setSelectkey('2-1');
-    } else if (history.location.pathname.startsWith('/RV') ) {
-      setSelectkey('2-2');
-    } else if (history.location.pathname.startsWith('/DNM')) {
-      setSelectkey('2-3');
-    } else if (history.location.pathname.startsWith('/CNV')) {
-      setSelectkey('2-4');
-    }else if (history.location.pathname.startsWith('/SV') ) {
-      setSelectkey('2-5');
+    } else if (history.location.pathname.startsWith('/explorevariant')) {
+      setSelectkey('2');
+    } else if (history.location.pathname.startsWith('/exploregene') ) {
+      setSelectkey('3');
     } else if (history.location.pathname.startsWith('/gene')) {
       setSelectkey('3');
     } else if (history.location.pathname.startsWith('/advance')) {

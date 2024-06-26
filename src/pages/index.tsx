@@ -148,139 +148,40 @@ export default function IndexPage() {
     });
   },[]);
 
-  // useEffect(()=>{
-  //   const myChart = echarts.init(chartRef.current,'auto',{renderer:'svg'}); //echart初始化容器
-  //   echarts.registerMap('organ_diagram', { svg: svg });
-  //   let option = {
-  //     tooltip: {},
-  //     geo: {
-  //       left: '5%',
-  //       right: '5%',
-  //       map: 'organ_diagram',
-  //       selectedMode: 'single',
-  //       itemStyle: {
-  //         color: null,
-  //       },
-  //       emphasis: {
-  //         focus: 'self',
-  //         itemStyle: {
-  //           color: "#9AC5F4",
-  //         },
-  //         label: {
-  //           position: 'bottom',
-  //           distance: 0,
-  //           textBorderColor: '#fff',
-  //           textBorderWidth: 2
-  //         }
-  //       },
-  //       blur: {},
-  //       select: {
-  //         itemStyle: {
-  //           color: null,
-  //           // shadowColor: 'rgba(0, 0, 0, 0.5)',
-  //           // shadowBlur: 10
-  //         },
-  //         label: {
-  //           show: false,
-  //           textBorderColor: '#fff',
-  //           textBorderWidth: 2
-  //         }
-  //       }
-  //     },
-  //     visualMap:{
-  //       show:false,
-  //       min:0,
-  //       max:600,
-  //       inRange:{
-  //         colorLightness:[0,1]
-  //       }
-  //     },
-  //     // grid: {
-  //     //   left: '60%',
-  //     //   right: '20%',
-  //     //   top: '10%',
-  //     //   bottom: '20%'
-  //     // },
-  //     // xAxis: {},
-  //     // yAxis: {
-  //     //   data: [
-  //     //     'heart',
-  //     //     'large-intestine',
-  //     //     'small-intestine',
-  //     //     'spleen',
-  //     //     'kidney',
-  //     //     'lung',
-  //     //     'liver'
-  //     //   ]
-  //     // },
-  //     // series: [
-  //     //   {
-  //     //     type: 'bar',
-  //     //     emphasis: {
-  //     //       focus: 'self'
-  //     //     },
-  //     //     data: [121, 321, 141, 52, 198, 289, 139]
-  //     //   }
-  //     // ]
-  //   };
-  //   myChart.setOption(option);
-  //   myChart.on('click', { geoIndex: 0,name: 'heart' }, function (param) {
-  //     console.log("click")
-  //     console.log(param.name)
-  //     window.open("https://cn.bing.com/search?q="+param.name,'_blank')
-  //   });
-  //   // myChart.on('mouseover', { seriesIndex: 0 }, function (event) {
-  //   //   myChart.dispatchAction({
-  //   //     type: 'highlight',
-  //   //     geoIndex: 0,
-  //   //     name: event.name
-  //   //   });
-  //   // });
-  //   // myChart.on('mouseout', { seriesIndex: 0 }, function (event) {
-  //   //   myChart.dispatchAction({
-  //   //     type: 'downplay',
-  //   //     geoIndex: 0,
-  //   //     name: event.name
-  //   //   });
-  //   // });
-  // },[svg]);
 
-  const [buttontext, setButtontext] = useState("GWAS Dataset");
-  const [placeholder, setPlaceholder] = useState("Please enter a trait keyword");
-  const [url, setUrl] = useState("/datasetoverview/");
+  const [buttontext, setButtontext] = useState("Variant");
+  const [placeholder, setPlaceholder] = useState("Please enter a keyword");
+  const [url, setUrl] = useState("/explorevariant/");
 
   const handleMenuClick: MenuProps['onClick'] = (e) => {
     // message.info('Click on menu item.' + e.key);
     if (e.key=="1"){
-      setButtontext("GWAS Dataset");
-      setPlaceholder("Please enter a trait keyword, e.g. Coronary Artery Disease");
-      setUrl("/datasetoverview/");
+      setButtontext("Variant");
+      setPlaceholder("Please enter a rsid");
+      setUrl("/explorevariant/");
     }else if(e.key=="2"){
-      setButtontext("CMap Signature");
-      setPlaceholder("Please enter a CMap keyword, e.g. lisofylline");
-      setUrl("/cmapoverview/");
+      setButtontext("Location");
+      setPlaceholder("Please enter a Location");
+      setUrl("/variant/");
     }else {
-      setButtontext("GEO Signature");
-      setPlaceholder("Please enter a GEO keyword, e.g. JCAD");
-      setUrl("/geooverview/");
+      setButtontext("Gene");
+      setPlaceholder("Please enter a Gene");
+      setUrl("/exploregene/");
     }
   };
 
   const items: MenuProps['items'] = [
     {
-      label: 'GWAS Dataset',
+      label: 'Rsid',
       key: '1',
-      icon: <DatasetIcon />,
     },
     {
-      label: 'CMap Signature',
+      label: 'Location',
       key: '2',
-      icon: <DrugIcon />,
     },
     {
-      label: 'GEO Signature',
+      label: 'Gene',
       key: '3',
-      icon: <VSIcon />,
     },
   ];
 
@@ -330,20 +231,17 @@ export default function IndexPage() {
           <strong style={{ fontSize: '1.2em' }}>
             e.g.{' '}
             <Space>
-              <a href={URL_PREFIX + '/datasetoverview/Coronary Artery Disease'} target={'_blank'}>
-                Coronary Artery Disease,
+              <a href={URL_PREFIX + '/explorevariant/rs9890128'} target={'_blank'}>
+                rs9890128,
               </a>
               <a
-                href={URL_PREFIX + '/datasetoverview/Attention Deficit'}
+                href={URL_PREFIX + '/variant/chr7:620000-720000'}
                 target={'_blank'}
               >
-                Attention Deficit,
+                chr7:620000-720000,
               </a>
-              <a href={URL_PREFIX + '/cmapoverview/lisofylline'} target={'_blank'}>
-                lisofylline,
-              </a>
-              <a href={URL_PREFIX + '/geooverview/JCAD'} target={'_blank'}>
-                JCAD
+              <a href={URL_PREFIX + '/exploregene/NRG1'} target={'_blank'}>
+                NRG1
               </a>
             </Space>
           </strong>

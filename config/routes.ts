@@ -16,6 +16,10 @@ export default [
         component: '@/pages/VariantOverview',
       },
       {
+        path: '/explorevariant/:name',
+        component: '@/pages/ExploreVariant',
+      },
+      {
         path: '/datasetresult/:name',
         component: '@/pages/DatasetResult',
       },
@@ -30,6 +34,10 @@ export default [
       {
         path: '/gene_association/:name',
         component: '@/pages/GeneAssociation',
+      },
+      {
+        path: '/exploregene/:name',
+        component: '@/pages/ExploreGene',
       },
       {
         path: '/gene_post/:name',

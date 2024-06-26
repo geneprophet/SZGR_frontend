@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from './index.less';
-import { getRemoteGenecura, getRemoteGenecuraLike } from "@/pages/GeneCuration/service";
+import { getRemoteGeneeqtl, getRemoteGeneeqtlLike } from "@/pages/GenePost/service";
 import { Breadcrumb, Col, Divider, Row, Select, Space, Table } from "antd";
 import {
   AnalysisIcon,DetailIcon
@@ -31,7 +31,7 @@ export default function Page(props: any) {
     if(name){
       if (name == "all"){
         setName(undefined);
-        getRemoteGenecura({
+        getRemoteGeneeqtl({
           pageSize: pagesize,
           pageIndex: pageindex,
           gene: undefined,
@@ -43,7 +43,7 @@ export default function Page(props: any) {
           setTotal(res.meta.total);
         });
       }else {
-        getRemoteGenecuraLike({
+        getRemoteGeneeqtlLike({
           pageSize: pagesize,
           pageIndex: pageindex,
           gene: name,
@@ -55,7 +55,6 @@ export default function Page(props: any) {
           setTotal(res.meta.total);
         });
       }
-
     }
 
   },[name]);
@@ -67,6 +66,14 @@ export default function Page(props: any) {
 
   const columns =[
     Table.SELECTION_COLUMN,
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Evidence</strong>,
+      key: 'evidence',
+      dataIndex: 'evidence',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
       key: 'gene',
@@ -83,12 +90,12 @@ export default function Page(props: any) {
         ));
         return (
           <Select
-            key={'cmapnameSelect'}
+            key={'geneSelect'}
             showSearch={true}
             placeholder={'input and select a gene'}
             filterOption={false}
             onFocus={async () => {
-              const remoteKeywords = await getRemoteGenecura({
+              const remoteKeywords = await getRemoteGeneeqtl({
                 pageSize: 100,
                 pageIndex: 1,
                 gene: undefined,
@@ -106,7 +113,7 @@ export default function Page(props: any) {
               }
             }}
             onSearch={async (value: string) => {
-              const remoteKeywords = await getRemoteGenecuraLike({
+              const remoteKeywords = await getRemoteGeneeqtlLike({
                 pageSize: 100,
                 pageIndex: 1,
                 gene:value,
@@ -133,16 +140,48 @@ export default function Page(props: any) {
         );
       },
       render: (text: string, record: any) => {
-          return (
-            <span>
+        return (
+          <span>
           <a href={"https://www.ncbi.nlm.nih.gov/gene/?term=" + record.gene} target={'_blank'}>
             <Space style={{ fontWeight: 'bold' }}>
               {record.gene}
             </Space>
           </a>
           </span>
-          )
+        )
       }
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>pph3</strong>,
+      key: 'pph3',
+      dataIndex: 'pph3',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>pph4</strong>,
+      key: 'pph4',
+      dataIndex: 'pph4',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>p</strong>,
+      key: 'p',
+      dataIndex: 'p',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>FDR</strong>,
+      key: 'fdr',
+      dataIndex: 'fdr',
+      ellipsis: true,
+      search: false,
+      sorter:true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Cell Type</strong>,
@@ -151,19 +190,28 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter:true,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Species</strong>,
-      key: 'species',
-      dataIndex: 'species',
-      ellipsis: true,
-      search: false,
-      sorter:true,
+      width: 200,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Trait</strong>,
       key: 'trait',
       dataIndex: 'trait',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Ancestry</strong>,
+      key: 'pop',
+      dataIndex: 'pop',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Year</strong>,
+      key: 'year',
+      dataIndex: 'year',
       ellipsis: true,
       search: false,
       sorter:true,
@@ -188,14 +236,6 @@ export default function Page(props: any) {
           </a>
         </span>
       ),
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Year</strong>,
-      key: 'year',
-      dataIndex: 'year',
-      ellipsis: true,
-      search: false,
-      sorter:true,
     },
   ];
 
@@ -249,7 +289,7 @@ export default function Page(props: any) {
             }}
             onSubmit={() => {
               setLoading(true);
-              getRemoteGenecura({
+              getRemoteGeneeqtl({
                 pageSize: pagesize,
                 pageIndex: 1,
                 gene: keywords.gene,
@@ -263,7 +303,7 @@ export default function Page(props: any) {
             }}
             onReset={()=>{
               setLoading(true);
-              getRemoteGenecura({
+              getRemoteGeneeqtl({
                 pageSize: 10,
                 pageIndex: 1,
                 gene:undefined,
@@ -284,7 +324,7 @@ export default function Page(props: any) {
               setKeywords({ ...keywords, sort_field: sorter.field });
               setKeywords({ ...keywords, sort_direction: sorter.order });
               setLoading(true);
-                getRemoteGenecura({
+                getRemoteGeneeqtl({
                   pageSize: pagination.pageSize,
                   pageIndex: pagination.current,
                   gene:  keywords.gene,
