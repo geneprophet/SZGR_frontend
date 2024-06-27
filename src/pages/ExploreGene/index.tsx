@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from './index.less';
-import { getRemoteGenecura, getRemoteGenecuraLike } from "@/pages/ExploreGene/service";
+import {
+  getRemoteGenecrispr,
+  getRemoteGenecura,
+  getRemoteGenecuraLike,
+  getRemoteGenedrug
+} from "@/pages/ExploreGene/service";
 import { Breadcrumb, Col, Divider, Row, Select, Space, Table, Typography } from "antd";
 import {
   AnalysisIcon,DetailIcon
@@ -22,6 +27,18 @@ export default function Page(props: any) {
   const [total, setTotal] = useState(0);
   const [pagesize, setPagesize] = useState(10);
   const [pageindex, setPageindex] = useState(1);
+
+  const [gene2, setGene2] = useState(undefined);
+  const [loading2, setLoading2] = useState<boolean>(true);
+  const [total2, setTotal2] = useState(0);
+  const [pagesize2, setPagesize2] = useState(10);
+  const [pageindex2, setPageindex2] = useState(1);
+
+  const [gene3, setGene3] = useState(undefined);
+  const [loading3, setLoading3] = useState<boolean>(true);
+  const [total3, setTotal3] = useState(0);
+  const [pagesize3, setPagesize3] = useState(10);
+  const [pageindex3, setPageindex3] = useState(1);
 
   interface SearchKeywords {
     gene: string | undefined;
@@ -61,11 +78,77 @@ export default function Page(props: any) {
     }
 
   },[name]);
+  useEffect(()=>{
+    if(name){
+      if (name == "all"){
+        setName(undefined);
+        getRemoteGenecrispr({
+          pageSize: pagesize2,
+          pageIndex: pageindex2,
+          gene: undefined,
+          sort_field: undefined,
+          sort_direction: undefined
+        }).then((res) => {
+          setLoading2(false);
+          setGene2(res.data);
+          setTotal2(res.meta.total);
+        });
+      }else {
+        getRemoteGenecrispr({
+          pageSize: pagesize2,
+          pageIndex: pageindex2,
+          gene: name,
+          sort_field: undefined,
+          sort_direction: undefined
+        }).then((res) => {
+          setLoading2(false);
+          setGene2(res.data);
+          setTotal2(res.meta.total);
+        });
+      }
+    }
+
+  },[name]);
+  useEffect(()=>{
+    if(name){
+      if (name == "all"){
+        setName(undefined);
+        getRemoteGenedrug({
+          pageSize: pagesize3,
+          pageIndex: pageindex3,
+          gene: undefined,
+          sort_field: undefined,
+          sort_direction: undefined
+        }).then((res) => {
+          setLoading3(false);
+          setGene3(res.data);
+          setTotal3(res.meta.total);
+        });
+      }else {
+        getRemoteGenedrug({
+          pageSize: pagesize3,
+          pageIndex: pageindex3,
+          gene: name,
+          sort_field: undefined,
+          sort_direction: undefined
+        }).then((res) => {
+          setLoading3(false);
+          setGene3(res.data);
+          setTotal3(res.meta.total);
+        });
+      }
+    }
+
+  },[name]);
 
   const [genelist, setGenelist] = useState([]);
-
   const [selectitems, setSelectitems] = useState([]);
   const [selectitemsrowkey, setSelectitemsrowkey] = useState([]);
+
+  const [selectitems2, setSelectitems2] = useState([]);
+  const [selectitemsrowkey2, setSelectitemsrowkey2] = useState([]);
+  const [selectitems3, setSelectitems3] = useState([]);
+  const [selectitemsrowkey3, setSelectitemsrowkey3] = useState([]);
 
   const columns =[
     Table.SELECTION_COLUMN,
@@ -195,6 +278,251 @@ export default function Page(props: any) {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Year</strong>,
       key: 'year',
       dataIndex: 'year',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+  ];
+  const columns2 =[
+    Table.SELECTION_COLUMN,
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>technology</strong>,
+      key: 'technology',
+      dataIndex: 'technology',
+      ellipsis: true,
+      width: 150,
+      search: true,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>grna</strong>,
+      key: 'grna',
+      dataIndex: 'grna',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>gene</strong>,
+      key: 'gene',
+      dataIndex: 'gene',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>chr</strong>,
+      key: 'chr',
+      dataIndex: 'chr',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>start</strong>,
+      key: 'start',
+      dataIndex: 'start',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>end</strong>,
+      key: 'end',
+      dataIndex: 'end',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>diff</strong>,
+      key: 'diff',
+      dataIndex: 'diff',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>log2fc</strong>,
+      key: 'log2fc',
+      dataIndex: 'log2fc',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>p</strong>,
+      key: 'p',
+      dataIndex: 'p',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>fdr</strong>,
+      key: 'fdr',
+      dataIndex: 'fdr',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>celltype</strong>,
+      key: 'celltype',
+      dataIndex: 'celltype',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>PMID</strong>,
+      key: 'pmid',
+      dataIndex: 'pmid',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+      render: (text: string, record) => (
+        <span>
+          <a
+            className={styles.link}
+            href={'https://pubmed.ncbi.nlm.nih.gov/' + record.pmid}
+            target={'_blank'}
+          >
+            <Space>
+              {record.pmid}
+            </Space>
+          </a>
+        </span>
+      ),
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Year</strong>,
+      key: 'year',
+      dataIndex: 'year',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+  ];
+  const columns3 =[
+    Table.SELECTION_COLUMN,
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>gene</strong>,
+      key: 'gene',
+      dataIndex: 'gene',
+      ellipsis: true,
+      width: 150,
+      search: true,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>ensemble</strong>,
+      key: 'ensemble',
+      dataIndex: 'ensemble',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>chembl_id</strong>,
+      key: 'chembl_id',
+      dataIndex: 'chembl_id',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>drug_type</strong>,
+      key: 'drug_type',
+      dataIndex: 'drug_type',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>drug_name</strong>,
+      key: 'drug_name',
+      dataIndex: 'drug_name',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>clinical_trail</strong>,
+      key: 'clinical_trail',
+      dataIndex: 'clinical_trail',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>efo_id</strong>,
+      key: 'efo_id',
+      dataIndex: 'efo_id',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>efo_term</strong>,
+      key: 'efo_term',
+      dataIndex: 'efo_term',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>phase_ind</strong>,
+      key: 'phase_ind',
+      dataIndex: 'phase_ind',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>mesh</strong>,
+      key: 'mesh',
+      dataIndex: 'mesh',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>warning</strong>,
+      key: 'warning',
+      dataIndex: 'warning',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>action</strong>,
+      key: 'action',
+      dataIndex: 'action',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>mechanism_comment</strong>,
+      key: 'mechanism_comment',
+      dataIndex: 'mechanism_comment',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>mechanism_action</strong>,
+      key: 'mechanism_action',
+      dataIndex: 'mechanism_action',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>target_chembl_id</strong>,
+      key: 'target_chembl_id',
+      dataIndex: 'target_chembl_id',
       ellipsis: true,
       search: false,
       sorter:true,
@@ -408,70 +736,70 @@ export default function Page(props: any) {
       <Row justify={'center'}>
         <Col md={24}>
           <ProTable
-            columns={columns}
+            columns={columns2}
             bordered={true}
             options={false}
-            dataSource={genecura}
-            loading={loading}
+            dataSource={gene2}
+            loading={loading2}
             scroll={{ x: 1200 }}
             rowKey={(record: any) => {
-              return record.id.toString() + 'table';
+              return record.id.toString() + 'table2';
             }}
             search={false}
             pagination={{
-              pageSize: pagesize,
-              total: total,
+              pageSize: pagesize2,
+              total: total2,
               pageSizeOptions: [10, 20, 50, 100],
               showQuickJumper: true,
               showSizeChanger: true,
             }}
             onSubmit={() => {
-              setLoading(true);
-              getRemoteGenecura({
-                pageSize: pagesize,
+              setLoading2(true);
+              getRemoteGenecrispr({
+                pageSize: pagesize2,
                 pageIndex: 1,
                 gene: keywords.gene,
                 sort_field: undefined,
                 sort_direction: undefined,
               }).then((res) => {
-                setGenecura(res.data);
-                setLoading(false);
-                setTotal(res.meta.total);
+                setGene2(res.data);
+                setLoading2(false);
+                setTotal2(res.meta.total);
               });
             }}
             onReset={()=>{
-              setLoading(true);
-              getRemoteGenecura({
+              setLoading2(true);
+              getRemoteGenecrispr({
                 pageSize: 10,
                 pageIndex: 1,
                 gene:undefined,
                 sort_field: undefined,
                 sort_direction: undefined,
               }).then((res) => {
-                setGenecura(res.data);
-                setLoading(false);
-                setTotal(res.meta.total);
+                setGene2(res.data);
+                setLoading2(false);
+                setTotal2(res.meta.total);
                 setKeywords({});
               });
             }}
             onChange={(pagination, filters, sorter, extra) => {
               // console.log(pagination);
               // console.log(sorter);
-              setPageindex(pagination.current);
-              setPagesize(pagination.pageSize);
+              setPageindex2(pagination.current);
+              setPagesize2(pagination.pageSize);
               setKeywords({ ...keywords, sort_field: sorter.field });
               setKeywords({ ...keywords, sort_direction: sorter.order });
-              setLoading(true);
-              getRemoteGenecura({
+              setLoading2(true);
+              getRemoteGenecrispr({
                 pageSize: pagination.pageSize,
                 pageIndex: pagination.current,
                 gene:  keywords.gene,
                 sort_field: sorter.field,
                 sort_direction: sorter.order,
               }).then((res) => {
-                setGenecura(res.data);
-                setLoading(false);
-                setTotal(res.meta.total);
+                setGene2(res.data);
+                setLoading2(false);
+                setTotal2(res.meta.total);
               });
 
             }}
@@ -479,37 +807,37 @@ export default function Page(props: any) {
               fixed: true,
               onSelect: (record, selected, selectedRows, nativeEvent) => {
                 if (selected) {
-                  let a = Array.from(new Set(selectitems.concat(selectedRows)));
+                  let a = Array.from(new Set(selectitems2.concat(selectedRows)));
                   let b = a.filter((res) => res != undefined);
-                  setSelectitems(b);
-                  let c = b.map((value) => value.id + 'table');
-                  setSelectitemsrowkey(c);
+                  setSelectitems2(b);
+                  let c = b.map((value) => value.id + 'table2');
+                  setSelectitemsrowkey2(c);
                 } else {
-                  let b = selectitems.filter((x) => x.id != record.id);
-                  setSelectitems(b);
-                  let c = b.map((value) => value.id + 'table');
-                  setSelectitemsrowkey(c);
+                  let b = selectitems2.filter((x) => x.id != record.id);
+                  setSelectitems2(b);
+                  let c = b.map((value) => value.id + 'table2');
+                  setSelectitemsrowkey2(c);
                 }
               },
               onSelectAll: (selected, selectedRows, changeRows) => {
                 if (selected) {
-                  let a = uniqueArray(selectitems.concat(changeRows), 'id');
+                  let a = uniqueArray(selectitems2.concat(changeRows), 'id');
                   let b = a.filter((res) => res != undefined);
-                  setSelectitems(b);
-                  let c = b.map((value) => value.id + 'table');
-                  setSelectitemsrowkey(c);
+                  setSelectitems2(b);
+                  let c = b.map((value) => value.id + 'table2');
+                  setSelectitemsrowkey2(c);
                 } else {
                   let a = new Set();
                   changeRows.forEach((value) => {
                     a.add(value.id);
                   });
-                  let b = selectitems.filter((x) => !a.has(x.id));
-                  setSelectitems(b);
-                  let c = b.map((value) => value.id + 'table');
-                  setSelectitemsrowkey(c);
+                  let b = selectitems2.filter((x) => !a.has(x.id));
+                  setSelectitems2(b);
+                  let c = b.map((value) => value.id + 'table2');
+                  setSelectitemsrowkey2(c);
                 }
               },
-              selectedRowKeys: selectitemsrowkey,
+              selectedRowKeys: selectitemsrowkey2,
             }}
             tableAlertRender={({
                                  selectedRowKeys,
@@ -517,13 +845,13 @@ export default function Page(props: any) {
                                  onCleanSelected,
                                }) => {
               const onCancelselected = () => {
-                setSelectitems([]);
-                setSelectitemsrowkey([]);
+                setSelectitems2([]);
+                setSelectitemsrowkey2([]);
               };
               return (
                 <Space size={24}>
                   <span>
-                    {selectitems.length} items selected
+                    {selectitems2.length} items selected
                     <span onClick={onCancelselected}>
                       <a style={{ marginLeft: 8 }} onClick={onCleanSelected}>
                         Clear selected
@@ -552,7 +880,7 @@ export default function Page(props: any) {
                         'year',
                       ];
                       const json2csvParser = new Parser({ fields });
-                      const csv = json2csvParser.parse(selectitems);
+                      const csv = json2csvParser.parse(selectitems2);
                       element.setAttribute(
                         'href',
                         'data:text/csv;charset=utf-8,' +
@@ -560,7 +888,184 @@ export default function Page(props: any) {
                       );
                       element.setAttribute(
                         'download',
-                        'Gene_curation.csv',
+                        'Gene.csv',
+                      );
+                      element.style.display = 'none';
+                      document.body.appendChild(element);
+                      element.click();
+                      document.body.removeChild(element);
+                      onCleanSelected;
+                    }}
+                  >
+                    Download
+                  </a>
+                </Space>
+              );
+            }}
+          />
+        </Col>
+      </Row>
+      <Divider />
+      <Row>
+        <Col md={4}>
+          <Title level={2}>Drug</Title>
+        </Col>
+      </Row>
+      <Row justify={'center'}>
+        <Col md={24}>
+          <ProTable
+            columns={columns3}
+            bordered={true}
+            options={false}
+            dataSource={gene3}
+            loading={loading3}
+            scroll={{ x: 1200 }}
+            rowKey={(record: any) => {
+              return record.id.toString() + 'table3';
+            }}
+            search={false}
+            pagination={{
+              pageSize: pagesize3,
+              total: total3,
+              pageSizeOptions: [10, 20, 50, 100],
+              showQuickJumper: true,
+              showSizeChanger: true,
+            }}
+            onSubmit={() => {
+              setLoading3(true);
+              getRemoteGenedrug({
+                pageSize: pagesize3,
+                pageIndex: 1,
+                gene: keywords.gene,
+                sort_field: undefined,
+                sort_direction: undefined,
+              }).then((res) => {
+                setGene3(res.data);
+                setLoading3(false);
+                setTotal3(res.meta.total);
+              });
+            }}
+            onReset={()=>{
+              setLoading3(true);
+              getRemoteGenedrug({
+                pageSize: 10,
+                pageIndex: 1,
+                gene:undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
+              }).then((res) => {
+                setGene3(res.data);
+                setLoading3(false);
+                setTotal3(res.meta.total);
+                setKeywords({});
+              });
+            }}
+            onChange={(pagination, filters, sorter, extra) => {
+              // console.log(pagination);
+              // console.log(sorter);
+              setPageindex3(pagination.current);
+              setPagesize3(pagination.pageSize);
+              setKeywords({ ...keywords, sort_field: sorter.field });
+              setKeywords({ ...keywords, sort_direction: sorter.order });
+              setLoading3(true);
+              getRemoteGenedrug({
+                pageSize: pagination.pageSize,
+                pageIndex: pagination.current,
+                gene:  keywords.gene,
+                sort_field: sorter.field,
+                sort_direction: sorter.order,
+              }).then((res) => {
+                setGene3(res.data);
+                setLoading3(false);
+                setTotal3(res.meta.total);
+              });
+            }}
+            rowSelection={{
+              fixed: true,
+              onSelect: (record, selected, selectedRows, nativeEvent) => {
+                if (selected) {
+                  let a = Array.from(new Set(selectitems3.concat(selectedRows)));
+                  let b = a.filter((res) => res != undefined);
+                  setSelectitems3(b);
+                  let c = b.map((value) => value.id + 'table3');
+                  setSelectitemsrowkey3(c);
+                } else {
+                  let b = selectitems3.filter((x) => x.id != record.id);
+                  setSelectitems3(b);
+                  let c = b.map((value) => value.id + 'table3');
+                  setSelectitemsrowkey3(c);
+                }
+              },
+              onSelectAll: (selected, selectedRows, changeRows) => {
+                if (selected) {
+                  let a = uniqueArray(selectitems3.concat(changeRows), 'id');
+                  let b = a.filter((res) => res != undefined);
+                  setSelectitems3(b);
+                  let c = b.map((value) => value.id + 'table3');
+                  setSelectitemsrowkey3(c);
+                } else {
+                  let a = new Set();
+                  changeRows.forEach((value) => {
+                    a.add(value.id);
+                  });
+                  let b = selectitems3.filter((x) => !a.has(x.id));
+                  setSelectitems3(b);
+                  let c = b.map((value) => value.id + 'table3');
+                  setSelectitemsrowkey3(c);
+                }
+              },
+              selectedRowKeys: selectitemsrowkey3,
+            }}
+            tableAlertRender={({
+                                 selectedRowKeys,
+                                 selectedRows,
+                                 onCleanSelected,
+                               }) => {
+              const onCancelselected = () => {
+                setSelectitems3([]);
+                setSelectitemsrowkey3([]);
+              };
+              return (
+                <Space size={24}>
+                  <span>
+                    {selectitems3.length} items selected
+                    <span onClick={onCancelselected}>
+                      <a style={{ marginLeft: 8 }} onClick={onCleanSelected}>
+                        Clear selected
+                      </a>
+                    </span>
+                  </span>
+                </Space>
+              );
+            }}
+            tableAlertOptionRender={({
+                                       selectedRowKeys,
+                                       selectedRows,
+                                       onCleanSelected,
+                                     }) => {
+              return (
+                <Space size={20}>
+                  <a
+                    onClick={() => {
+                      let element = document.createElement('a');
+                      const fields = [
+                        'gene',
+                        'celltype',
+                        'species',
+                        'trait',
+                        'pmid',
+                        'year',
+                      ];
+                      const json2csvParser = new Parser({ fields });
+                      const csv = json2csvParser.parse(selectitems3);
+                      element.setAttribute(
+                        'href',
+                        'data:text/csv;charset=utf-8,' +
+                        encodeURIComponent(csv),
+                      );
+                      element.setAttribute(
+                        'download',
+                        'Gene.csv',
                       );
                       element.style.display = 'none';
                       document.body.appendChild(element);

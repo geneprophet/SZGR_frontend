@@ -44,6 +44,10 @@ export default [
         component: '@/pages/GenePost',
       },
       {
+        path: '/advance/',
+        component: '@/pages/Advance',
+      },
+      {
         path: '/explorecmap/:dataset/:tissue/:sig_index',
         component: '@/pages/ExploreCMap',
       },

@@ -23,28 +23,25 @@ const errorHandler = function (error: any) {
 };
 export const extendRequest = extend({ errorHandler });
 
-export const getRemoteGenedeg = async ({
-                                         pageSize,
-                                         pageIndex,
-                                      gene,
-                                         evidence,
+export const getRemoteVariantadvance = async ({
+                                          pageSize,
+                                          pageIndex,
+                                         vid,
                                          sort_field,
                                          sort_direction
-                                       }: {
+                                        }: {
   pageSize: number | undefined;
   pageIndex: number | undefined;
-  gene: string | undefined;
-  evidence: string | undefined;
+  vid: string | undefined;
   sort_field: string | undefined;
   sort_direction: string | undefined;
 }) => {
-  return extendRequest(API_PREFIX + '/genedeg', {
+  return extendRequest(API_PREFIX + '/validatesnp', {
     method: 'get',
     params: {
       pageSize: pageSize,
       pageIndex: pageIndex,
-      gene:gene,
-      evidence:evidence,
+      vid: vid,
       sort_field:sort_field,
       sort_direction:sort_direction
     },
@@ -56,12 +53,72 @@ export const getRemoteGenedeg = async ({
       return false;
     });
 };
-export const getRemoteGenedegLike = async ({
+export const getRemoteVariantadvanceLike = async ({
+                                         pageSize,
+                                         pageIndex,
+                                             vid,
+                                             sort_field,
+                                             sort_direction
+                                       }: {
+  pageSize: number | undefined;
+  pageIndex: number | undefined;
+  vid: string | undefined;
+  sort_field: string | undefined;
+  sort_direction: string | undefined;
+}) => {
+  return extendRequest(API_PREFIX + '/validatesnplike', {
+    method: 'get',
+    params: {
+      pageSize: pageSize,
+      pageIndex: pageIndex,
+      vid: vid,
+      sort_field:sort_field,
+      sort_direction:sort_direction
+    },
+  })
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      return false;
+    });
+};
+export const getRemoteGeneadvance = async ({
+                                         pageSize,
+                                         pageIndex,
+                                         gene,
+                                         sort_field,
+                                         sort_direction
+                                       }: {
+  pageSize: number | undefined;
+  pageIndex: number | undefined;
+  gene: string | undefined;
+  sort_field: string | undefined;
+  sort_direction: string | undefined;
+}) => {
+  return extendRequest(API_PREFIX + '/validategene', {
+    method: 'get',
+    params: {
+      pageSize: pageSize,
+      pageIndex: pageIndex,
+      gene: gene,
+      sort_field:sort_field,
+      sort_direction:sort_direction
+    },
+  })
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      return false;
+    });
+};
+export const getRemoteGeneadvancelike = async ({
                                              pageSize,
                                              pageIndex,
-                                          gene,
-                                          sort_field,
-                                          sort_direction
+                                                 gene,
+                                             sort_field,
+                                             sort_direction
                                            }: {
   pageSize: number | undefined;
   pageIndex: number | undefined;
@@ -69,12 +126,12 @@ export const getRemoteGenedegLike = async ({
   sort_field: string | undefined;
   sort_direction: string | undefined;
 }) => {
-  return extendRequest(API_PREFIX + '/genedeglike', {
+  return extendRequest(API_PREFIX + '/validategenelike', {
     method: 'get',
     params: {
       pageSize: pageSize,
       pageIndex: pageIndex,
-      gene:gene,
+      gene: gene,
       sort_field:sort_field,
       sort_direction:sort_direction
     },
