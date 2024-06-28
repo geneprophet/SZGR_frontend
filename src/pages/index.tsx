@@ -192,7 +192,7 @@ export default function IndexPage() {
 
   return (
     <div>
-      <Row justify="center" style={{ background: '#ECF2FF' }}>
+      <Row justify="center" style={{ background: '#BED7DC' }}>
         <Title level={2} className={styles.introduction}>
           SZGR 3.0: a one-stop shop of schizophrenia candidate genes
         </Title>

@@ -3,8 +3,8 @@ import styles from './index.less';
 import {
   getRemoteVariantAnno,
   getRemoteVariantAnnoLike,
-  getRemoteVariantGeneLike,getRemoteVariantCrispr,
-  getRemoteVariantGene, getRemoteVariantMPRA, getRemoteVariantMPRALike
+  getRemoteVariantGeneLike, getRemoteVariantCrispr,
+  getRemoteVariantGene, getRemoteVariantMPRA, getRemoteVariantMPRALike, getRemoteVariantValidate
 } from "@/pages/ExploreVariant/service";
 import { ApartmentOutlined, SearchOutlined } from '@ant-design/icons';
 import { Parser } from 'json2csv';
@@ -57,6 +57,12 @@ export default function Page(props: any) {
   const [total5, setTotal5] = useState(0);
   const [pagesize5, setPagesize5] = useState(10);
   const [pageindex5, setPageindex5] = useState(1);
+
+  const [variants6, setVariants6] = useState(undefined);
+  const [loading6, setLoading6] = useState<boolean>(true);
+  const [total6, setTotal6] = useState(0);
+  const [pagesize6, setPagesize6] = useState(10);
+  const [pageindex6, setPageindex6] = useState(1);
   interface SearchKeywords {
     vid: string | undefined;
     vtype: string | undefined;
@@ -249,6 +255,39 @@ export default function Page(props: any) {
           setLoading5(false);
           setVariants5(res.data);
           setTotal5(res.meta.total);
+        });
+      }
+    }
+
+  }, [name]);
+  useEffect(() => {
+    if (name){
+      if(name == "all"){
+        setName(undefined);
+        getRemoteVariantValidate({
+          pageSize: pagesize6,
+          pageIndex: pageindex6,
+          vid: undefined,
+          sort_field:undefined,
+          sort_direction:undefined
+        }).then((res) => {
+          setLoading6(false);
+          setVariants6(res.data);
+          setTotal6(res.meta.total);
+        });
+      }else if(name.startsWith("rs")){
+        setKeywords({ ...keywords, vid: name });
+        getRemoteVariantValidate({
+          pageSize: pagesize6,
+          pageIndex: pageindex6,
+          vid:name,
+          sort_field:undefined,
+          sort_direction:undefined
+        }).then((res) => {
+          // console.log(res.data);
+          setLoading6(false);
+          setVariants6(res.data);
+          setTotal6(res.meta.total);
         });
       }
     }
@@ -762,7 +801,6 @@ export default function Page(props: any) {
       width:100,
     }
   ];
-
   const columns3 = [
     Table.SELECTION_COLUMN,
     {
@@ -1289,6 +1327,107 @@ export default function Page(props: any) {
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>pmid</strong>,
+      key: 'pmid',
+      dataIndex: 'pmid',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:100,
+    },
+  ];
+  const columns6 = [
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Variant ID</strong>,
+      key: 'vid',
+      dataIndex: 'vid',
+      ellipsis: true,
+      width: 150,
+      search: false,
+      sorter: true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>loc</strong>,
+      key: 'loc',
+      dataIndex: 'loc',
+      ellipsis: true,
+      sorter: true,
+      search: false,
+      width:100,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Chr</strong>,
+      key: 'vchr',
+      dataIndex: 'vchr',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:100,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>start</strong>,
+      key: 'vs',
+      dataIndex: 'vs',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:150,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>end</strong>,
+      key: 've',
+      dataIndex: 've',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:100,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
+      key: 'gene',
+      dataIndex: 'gene',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:100,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>celltype</strong>,
+      key: 'celltype',
+      dataIndex: 'celltype',
+      ellipsis: true,
+      search: true,
+      sorter: true,
+      width:100,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>species</strong>,
+      key: 'species',
+      dataIndex: 'species',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:100
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>trait</strong>,
+      key: 'trait',
+      dataIndex: 'trait',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:150,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>year</strong>,
+      key: 'nyear',
+      dataIndex: 'nyear',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:100,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>PMID</strong>,
       key: 'pmid',
       dataIndex: 'pmid',
       ellipsis: true,
@@ -2338,6 +2477,98 @@ export default function Page(props: any) {
                   </a>
                 </Space>
               );
+            }}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={4}>
+          <Title level={2}>Curation</Title>
+        </Col>
+      </Row>
+      <Row justify={'center'}>
+        <Col md={24}>
+          <ProTable
+            columns={columns6}
+            bordered={true}
+            options={false}
+            dataSource={variants6}
+            loading={loading6}
+            scroll={{ x: 1500 }}
+            rowKey={(record: any) => {
+              return record.id.toString() + 'table5';
+            }}
+            search={false}
+            pagination={{
+              pageSize: pagesize6,
+              total: total6,
+              pageSizeOptions: [10, 20, 50, 100],
+              showQuickJumper: true,
+              showSizeChanger: true,
+            }}
+            onSubmit={() => {
+              setLoading6(true);
+              getRemoteVariantValidate({
+                pageSize: pagesize6,
+                pageIndex: 1,
+                vid:keywords.vid,
+                sort_field:undefined,
+                sort_direction:undefined
+              }).then((res) => {
+                setVariants6(res.data);
+                setLoading6(false);
+                setTotal6(res.meta.total);
+              });
+            }}
+            onReset={() => {
+              setLoading6(true);
+              getRemoteVariantValidate({
+                pageSize: 10,
+                pageIndex: 1,
+                vid:undefined,
+                sort_field:undefined,
+                sort_direction:undefined
+              }).then((res) => {
+                setVariants6(res.data);
+                setLoading6(false);
+                setTotal6(res.meta.total);
+                setPagesize6(res.meta.pageSize);
+                setKeywords({});
+              });
+            }}
+            onChange={(pagination, filters, sorter, extra) => {
+              // console.log(pagination);
+              // console.log(sorter);
+              setPageindex6(pagination.current);
+              setPagesize6(pagination.pageSize);
+              setKeywords({ ...keywords, sort_field: sorter.field });
+              setKeywords({ ...keywords, sort_direction: sorter.order });
+              setLoading6(true);
+              if (name){
+                getRemoteVariantValidate({
+                  pageSize: pagination.pageSize,
+                  pageIndex: pagination.current,
+                  vid:keywords.vid,
+                  sort_field: sorter.field,
+                  sort_direction: sorter.order,
+                }).then((res) => {
+                  setVariants6(res.data);
+                  setLoading6(false);
+                  setTotal6(res.meta.total);
+                });
+              }else {
+                getRemoteVariantValidate({
+                  pageSize: pagination.pageSize,
+                  pageIndex: pagination.current,
+                  vid:keywords.vid,
+                  sort_field: sorter.field,
+                  sort_direction: sorter.order,
+                }).then((res) => {
+                  setVariants6(res.data);
+                  setLoading6(false);
+                  setTotal6(res.meta.total);
+                });
+              }
             }}
           />
         </Col>

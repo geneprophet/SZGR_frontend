@@ -121,7 +121,7 @@ export default function (props) {
           label: (
             <a
               onClick={() => {
-                history.push('/variant/DNM');
+                history.push('/variant/CNV');
               }}
             >
               <strong style={{ color: '#252746' }}>CNV</strong>
@@ -145,13 +145,13 @@ export default function (props) {
     },
     {
       label: (
-        <a
-          onClick={() => {
-            history.push('/gene_curation/all');
-          }}
-        >
+        // <a
+        //   onClick={() => {
+        //     history.push('/gene_curation/all');
+        //   }}
+        // >
           <strong style={{ color: '#252746' }}>Gene</strong>
-        </a>
+        // </a>
       ),
       key: '3',
       icon: <GeneIcon />,
@@ -275,24 +275,24 @@ export default function (props) {
         <Layout>
           <Header className={styles.header}>
             <Row justify={'center'}>
-              <Col
-                xs={4}
-                sm={4}
-                md={4}
-                lg={4}
-                xl={4}
-                xxl={4}
-                style={{ textAlign: 'right' }}
-              >
-                <Image
-                  src={logo}
-                  style={{ width: '20%', float: 'right',paddingTop:'7px' }}
-                  preview={false}
-                  onClick={() => {
-                    history.push('/home');
-                  }}
-                ></Image>
-              </Col>
+              {/*<Col*/}
+              {/*  xs={4}*/}
+              {/*  sm={4}*/}
+              {/*  md={4}*/}
+              {/*  lg={4}*/}
+              {/*  xl={4}*/}
+              {/*  xxl={4}*/}
+              {/*  style={{ textAlign: 'right' }}*/}
+              {/*>*/}
+              {/*  <Image*/}
+              {/*    src={logo}*/}
+              {/*    style={{ width: '20%', float: 'right',paddingTop:'7px' }}*/}
+              {/*    preview={false}*/}
+              {/*    onClick={() => {*/}
+              {/*      history.push('/home');*/}
+              {/*    }}*/}
+              {/*  ></Image>*/}
+              {/*</Col>*/}
               <Col
                 xs={20}
                 sm={20}

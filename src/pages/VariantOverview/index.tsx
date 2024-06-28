@@ -74,6 +74,81 @@ export default function Page(props: any) {
           setVariants(res.data);
           setTotal(res.meta.total);
         });
+      }else if(name=="CV"){
+        getRemoteVariantLike({
+          pageSize: pagesize,
+          pageIndex: pageindex,
+          vid:undefined,
+          vtype:"CV",
+          pop:undefined,
+          sort_field:undefined,
+          sort_direction:undefined
+        }).then((res) => {
+          // console.log(res.data);
+          setLoading(false);
+          setVariants(res.data);
+          setTotal(res.meta.total);
+        });
+      } else if(name=="RV"){
+        getRemoteVariantLike({
+          pageSize: pagesize,
+          pageIndex: pageindex,
+          vid:undefined,
+          vtype:"RV",
+          pop:undefined,
+          sort_field:undefined,
+          sort_direction:undefined
+        }).then((res) => {
+          // console.log(res.data);
+          setLoading(false);
+          setVariants(res.data);
+          setTotal(res.meta.total);
+        });
+      } else if(name=="DNM"){
+        getRemoteVariantLike({
+          pageSize: pagesize,
+          pageIndex: pageindex,
+          vid:undefined,
+          vtype:"DNM",
+          pop:undefined,
+          sort_field:undefined,
+          sort_direction:undefined
+        }).then((res) => {
+          // console.log(res.data);
+          setLoading(false);
+          setVariants(res.data);
+          setTotal(res.meta.total);
+        });
+      } else if(name=="CNV"){
+        getRemoteVariantLike({
+          pageSize: pagesize,
+          pageIndex: pageindex,
+          vid:undefined,
+          vtype:"CNV",
+          pop:undefined,
+          sort_field:undefined,
+          sort_direction:undefined
+        }).then((res) => {
+          // console.log(res.data);
+          setLoading(false);
+          setVariants(res.data);
+          setTotal(res.meta.total);
+        });
+      } else if(name=="SV"){
+        getRemoteVariantLike({
+          pageSize: pagesize,
+          pageIndex: pageindex,
+          vid:undefined,
+          vtype:"SV",
+          pop:undefined,
+          sort_field:undefined,
+          sort_direction:undefined
+        }).then((res) => {
+          // console.log(res.data);
+          setLoading(false);
+          setVariants(res.data);
+          setTotal(res.meta.total);
+        });
       } else{
         let regex = /chr(\d+):([\d]+)-([\d]+)/;
         let match = name.match(regex);
@@ -96,10 +171,8 @@ export default function Page(props: any) {
             setTotal(res.meta.total);
           });
         }
-
       }
     }
-
   }, [name]);
 
   const [vtypelist, setVtypelist] = useState([]);

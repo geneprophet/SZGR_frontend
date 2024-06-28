@@ -234,3 +234,33 @@ export const getRemoteVariantCrispr = async ({
       return false;
     });
 };
+export const getRemoteVariantValidate = async ({
+                                               pageSize,
+                                               pageIndex,
+                                               vid,
+                                               sort_field,
+                                               sort_direction
+                                             }: {
+  pageSize: number | undefined;
+  pageIndex: number | undefined;
+  vid: string | undefined;
+  sort_field: string | undefined;
+  sort_direction: string | undefined;
+}) => {
+  return extendRequest(API_PREFIX + '/variantvalidate', {
+    method: 'get',
+    params: {
+      pageSize: pageSize,
+      pageIndex: pageIndex,
+      vid: vid,
+      sort_field:sort_field,
+      sort_direction:sort_direction
+    },
+  })
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      return false;
+    });
+};

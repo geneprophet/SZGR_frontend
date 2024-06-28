@@ -4,7 +4,7 @@ import {
   getRemoteGenecrispr,
   getRemoteGenecura,
   getRemoteGenecuraLike,
-  getRemoteGenedrug
+  getRemoteGenedrug, getRemoteGeneRNAseq
 } from "@/pages/ExploreGene/service";
 import { Breadcrumb, Col, Divider, Row, Select, Space, Table, Typography } from "antd";
 import {
@@ -39,6 +39,12 @@ export default function Page(props: any) {
   const [total3, setTotal3] = useState(0);
   const [pagesize3, setPagesize3] = useState(10);
   const [pageindex3, setPageindex3] = useState(1);
+
+  const [gene4, setGene4] = useState(undefined);
+  const [loading4, setLoading4] = useState<boolean>(true);
+  const [total4, setTotal4] = useState(0);
+  const [pagesize4, setPagesize4] = useState(10);
+  const [pageindex4, setPageindex4] = useState(1);
 
   interface SearchKeywords {
     gene: string | undefined;
@@ -140,6 +146,38 @@ export default function Page(props: any) {
     }
 
   },[name]);
+  useEffect(()=>{
+    if(name){
+      if (name == "all"){
+        setName(undefined);
+        getRemoteGeneRNAseq({
+          pageSize: pagesize4,
+          pageIndex: pageindex4,
+          gene: undefined,
+          sort_field: undefined,
+          sort_direction: undefined
+        }).then((res) => {
+          setLoading4(false);
+          setGene4(res.data);
+          setTotal4(res.meta.total);
+        });
+      }else {
+        getRemoteGeneRNAseq({
+          pageSize: pagesize4,
+          pageIndex: pageindex4,
+          gene: name,
+          sort_field: undefined,
+          sort_direction: undefined
+        }).then((res) => {
+          setLoading4(false);
+          setGene4(res.data);
+          setTotal4(res.meta.total);
+        });
+      }
+    }
+
+  },[name]);
+
 
   const [genelist, setGenelist] = useState([]);
   const [selectitems, setSelectitems] = useState([]);
@@ -528,6 +566,66 @@ export default function Page(props: any) {
       sorter:true,
     },
   ];
+  const columns4 =[
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
+      key: 'gene',
+      dataIndex: 'gene',
+      ellipsis: true,
+      width: 150,
+      search: true,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>log2fc</strong>,
+      key: 'log2fc',
+      dataIndex: 'log2fc',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>p</strong>,
+      key: 'p',
+      dataIndex: 'p',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>FDR</strong>,
+      key: 'fdr',
+      dataIndex: 'fdr',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Cell Type</strong>,
+      key: 'celltype',
+      dataIndex: 'celltype',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Tissue</strong>,
+      key: 'tissue',
+      dataIndex: 'tissue',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Study</strong>,
+      key: 'study',
+      dataIndex: 'study',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
+  ];
+
 
   return (
     <div>
@@ -542,7 +640,7 @@ export default function Page(props: any) {
             <Breadcrumb.Item>
               <a href="">
                 <strong style={{ fontFamily: 'sans-serif' }}>
-                  CMap Signatures
+                  Gene
                 </strong>
               </a>
             </Breadcrumb.Item>
@@ -552,177 +650,48 @@ export default function Page(props: any) {
       <Divider />
       <Row>
         <Col md={4}>
-          <Title level={2}>Curation</Title>
+          <Title level={2}>RNA-seq</Title>
         </Col>
       </Row>
       <Row justify={'center'}>
         <Col md={24}>
           <ProTable
-            columns={columns}
+            columns={columns4}
             bordered={true}
             options={false}
-            dataSource={genecura}
-            loading={loading}
+            dataSource={gene4}
+            loading={loading4}
             scroll={{ x: 1200 }}
             rowKey={(record: any) => {
-              return record.id.toString() + 'table';
+              return record.id.toString() + 'table4';
             }}
             search={false}
             pagination={{
-              pageSize: pagesize,
-              total: total,
+              pageSize: pagesize4,
+              total: total4,
               pageSizeOptions: [10, 20, 50, 100],
               showQuickJumper: true,
               showSizeChanger: true,
             }}
-            onSubmit={() => {
-              setLoading(true);
-              getRemoteGenecura({
-                pageSize: pagesize,
-                pageIndex: 1,
-                gene: keywords.gene,
-                sort_field: undefined,
-                sort_direction: undefined,
-              }).then((res) => {
-                setGenecura(res.data);
-                setLoading(false);
-                setTotal(res.meta.total);
-              });
-            }}
-            onReset={()=>{
-              setLoading(true);
-              getRemoteGenecura({
-                pageSize: 10,
-                pageIndex: 1,
-                gene:undefined,
-                sort_field: undefined,
-                sort_direction: undefined,
-              }).then((res) => {
-                setGenecura(res.data);
-                setLoading(false);
-                setTotal(res.meta.total);
-                setKeywords({});
-              });
-            }}
             onChange={(pagination, filters, sorter, extra) => {
               // console.log(pagination);
               // console.log(sorter);
-              setPageindex(pagination.current);
-              setPagesize(pagination.pageSize);
+              setPageindex4(pagination.current);
+              setPagesize4(pagination.pageSize);
               setKeywords({ ...keywords, sort_field: sorter.field });
               setKeywords({ ...keywords, sort_direction: sorter.order });
-              setLoading(true);
-                getRemoteGenecura({
-                  pageSize: pagination.pageSize,
-                  pageIndex: pagination.current,
-                  gene:  keywords.gene,
-                  sort_field: sorter.field,
-                  sort_direction: sorter.order,
-                }).then((res) => {
-                  setGenecura(res.data);
-                  setLoading(false);
-                  setTotal(res.meta.total);
-                });
-
-            }}
-            rowSelection={{
-              fixed: true,
-              onSelect: (record, selected, selectedRows, nativeEvent) => {
-                if (selected) {
-                  let a = Array.from(new Set(selectitems.concat(selectedRows)));
-                  let b = a.filter((res) => res != undefined);
-                  setSelectitems(b);
-                  let c = b.map((value) => value.id + 'table');
-                  setSelectitemsrowkey(c);
-                } else {
-                  let b = selectitems.filter((x) => x.id != record.id);
-                  setSelectitems(b);
-                  let c = b.map((value) => value.id + 'table');
-                  setSelectitemsrowkey(c);
-                }
-              },
-              onSelectAll: (selected, selectedRows, changeRows) => {
-                if (selected) {
-                  let a = uniqueArray(selectitems.concat(changeRows), 'id');
-                  let b = a.filter((res) => res != undefined);
-                  setSelectitems(b);
-                  let c = b.map((value) => value.id + 'table');
-                  setSelectitemsrowkey(c);
-                } else {
-                  let a = new Set();
-                  changeRows.forEach((value) => {
-                    a.add(value.id);
-                  });
-                  let b = selectitems.filter((x) => !a.has(x.id));
-                  setSelectitems(b);
-                  let c = b.map((value) => value.id + 'table');
-                  setSelectitemsrowkey(c);
-                }
-              },
-              selectedRowKeys: selectitemsrowkey,
-            }}
-            tableAlertRender={({
-                                 selectedRowKeys,
-                                 selectedRows,
-                                 onCleanSelected,
-                               }) => {
-              const onCancelselected = () => {
-                setSelectitems([]);
-                setSelectitemsrowkey([]);
-              };
-              return (
-                <Space size={24}>
-                  <span>
-                    {selectitems.length} items selected
-                    <span onClick={onCancelselected}>
-                      <a style={{ marginLeft: 8 }} onClick={onCleanSelected}>
-                        Clear selected
-                      </a>
-                    </span>
-                  </span>
-                </Space>
-              );
-            }}
-            tableAlertOptionRender={({
-                                       selectedRowKeys,
-                                       selectedRows,
-                                       onCleanSelected,
-                                     }) => {
-              return (
-                <Space size={20}>
-                  <a
-                    onClick={() => {
-                      let element = document.createElement('a');
-                      const fields = [
-                        'gene',
-                        'celltype',
-                        'species',
-                        'trait',
-                        'pmid',
-                        'year',
-                      ];
-                      const json2csvParser = new Parser({ fields });
-                      const csv = json2csvParser.parse(selectitems);
-                      element.setAttribute(
-                        'href',
-                        'data:text/csv;charset=utf-8,' +
-                        encodeURIComponent(csv),
-                      );
-                      element.setAttribute(
-                        'download',
-                        'Gene_curation.csv',
-                      );
-                      element.style.display = 'none';
-                      document.body.appendChild(element);
-                      element.click();
-                      document.body.removeChild(element);
-                      onCleanSelected;
-                    }}
-                  >
-                    Download
-                  </a>
-                </Space>
-              );
+              setLoading4(true);
+              getRemoteGeneRNAseq({
+                pageSize: pagination.pageSize,
+                pageIndex: pagination.current,
+                gene:  keywords.gene,
+                sort_field: sorter.field,
+                sort_direction: sorter.order,
+              }).then((res) => {
+                setGene4(res.data);
+                setLoading4(false);
+                setTotal4(res.meta.total);
+              });
             }}
           />
         </Col>
@@ -889,6 +858,184 @@ export default function Page(props: any) {
                       element.setAttribute(
                         'download',
                         'Gene.csv',
+                      );
+                      element.style.display = 'none';
+                      document.body.appendChild(element);
+                      element.click();
+                      document.body.removeChild(element);
+                      onCleanSelected;
+                    }}
+                  >
+                    Download
+                  </a>
+                </Space>
+              );
+            }}
+          />
+        </Col>
+      </Row>
+      <Divider />
+      <Row>
+        <Col md={4}>
+          <Title level={2}>Curation</Title>
+        </Col>
+      </Row>
+      <Row justify={'center'}>
+        <Col md={24}>
+          <ProTable
+            columns={columns}
+            bordered={true}
+            options={false}
+            dataSource={genecura}
+            loading={loading}
+            scroll={{ x: 1200 }}
+            rowKey={(record: any) => {
+              return record.id.toString() + 'table';
+            }}
+            search={false}
+            pagination={{
+              pageSize: pagesize,
+              total: total,
+              pageSizeOptions: [10, 20, 50, 100],
+              showQuickJumper: true,
+              showSizeChanger: true,
+            }}
+            onSubmit={() => {
+              setLoading(true);
+              getRemoteGenecura({
+                pageSize: pagesize,
+                pageIndex: 1,
+                gene: keywords.gene,
+                sort_field: undefined,
+                sort_direction: undefined,
+              }).then((res) => {
+                setGenecura(res.data);
+                setLoading(false);
+                setTotal(res.meta.total);
+              });
+            }}
+            onReset={()=>{
+              setLoading(true);
+              getRemoteGenecura({
+                pageSize: 10,
+                pageIndex: 1,
+                gene:undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
+              }).then((res) => {
+                setGenecura(res.data);
+                setLoading(false);
+                setTotal(res.meta.total);
+                setKeywords({});
+              });
+            }}
+            onChange={(pagination, filters, sorter, extra) => {
+              // console.log(pagination);
+              // console.log(sorter);
+              setPageindex(pagination.current);
+              setPagesize(pagination.pageSize);
+              setKeywords({ ...keywords, sort_field: sorter.field });
+              setKeywords({ ...keywords, sort_direction: sorter.order });
+              setLoading(true);
+              getRemoteGenecura({
+                pageSize: pagination.pageSize,
+                pageIndex: pagination.current,
+                gene:  keywords.gene,
+                sort_field: sorter.field,
+                sort_direction: sorter.order,
+              }).then((res) => {
+                setGenecura(res.data);
+                setLoading(false);
+                setTotal(res.meta.total);
+              });
+
+            }}
+            rowSelection={{
+              fixed: true,
+              onSelect: (record, selected, selectedRows, nativeEvent) => {
+                if (selected) {
+                  let a = Array.from(new Set(selectitems.concat(selectedRows)));
+                  let b = a.filter((res) => res != undefined);
+                  setSelectitems(b);
+                  let c = b.map((value) => value.id + 'table');
+                  setSelectitemsrowkey(c);
+                } else {
+                  let b = selectitems.filter((x) => x.id != record.id);
+                  setSelectitems(b);
+                  let c = b.map((value) => value.id + 'table');
+                  setSelectitemsrowkey(c);
+                }
+              },
+              onSelectAll: (selected, selectedRows, changeRows) => {
+                if (selected) {
+                  let a = uniqueArray(selectitems.concat(changeRows), 'id');
+                  let b = a.filter((res) => res != undefined);
+                  setSelectitems(b);
+                  let c = b.map((value) => value.id + 'table');
+                  setSelectitemsrowkey(c);
+                } else {
+                  let a = new Set();
+                  changeRows.forEach((value) => {
+                    a.add(value.id);
+                  });
+                  let b = selectitems.filter((x) => !a.has(x.id));
+                  setSelectitems(b);
+                  let c = b.map((value) => value.id + 'table');
+                  setSelectitemsrowkey(c);
+                }
+              },
+              selectedRowKeys: selectitemsrowkey,
+            }}
+            tableAlertRender={({
+                                 selectedRowKeys,
+                                 selectedRows,
+                                 onCleanSelected,
+                               }) => {
+              const onCancelselected = () => {
+                setSelectitems([]);
+                setSelectitemsrowkey([]);
+              };
+              return (
+                <Space size={24}>
+                  <span>
+                    {selectitems.length} items selected
+                    <span onClick={onCancelselected}>
+                      <a style={{ marginLeft: 8 }} onClick={onCleanSelected}>
+                        Clear selected
+                      </a>
+                    </span>
+                  </span>
+                </Space>
+              );
+            }}
+            tableAlertOptionRender={({
+                                       selectedRowKeys,
+                                       selectedRows,
+                                       onCleanSelected,
+                                     }) => {
+              return (
+                <Space size={20}>
+                  <a
+                    onClick={() => {
+                      let element = document.createElement('a');
+                      const fields = [
+                        'gene',
+                        'celltype',
+                        'species',
+                        'trait',
+                        'pmid',
+                        'year',
+                      ];
+                      const json2csvParser = new Parser({ fields });
+                      const csv = json2csvParser.parse(selectitems);
+                      element.setAttribute(
+                        'href',
+                        'data:text/csv;charset=utf-8,' +
+                        encodeURIComponent(csv),
+                      );
+                      element.setAttribute(
+                        'download',
+                        'Gene_curation.csv',
                       );
                       element.style.display = 'none';
                       document.body.appendChild(element);

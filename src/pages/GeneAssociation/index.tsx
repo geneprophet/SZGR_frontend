@@ -75,7 +75,6 @@ export default function Page(props: any) {
         });
       }
     }
-
   },[name]);
 
   const [genelist, setGenelist] = useState([]);

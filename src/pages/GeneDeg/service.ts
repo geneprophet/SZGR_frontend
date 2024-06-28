@@ -86,3 +86,36 @@ export const getRemoteGenedegLike = async ({
       return false;
     });
 };
+export const getRemoteGenedmg = async ({
+                                         pageSize,
+                                         pageIndex,
+                                         gene,
+                                         evidence,
+                                         sort_field,
+                                         sort_direction
+                                       }: {
+  pageSize: number | undefined;
+  pageIndex: number | undefined;
+  gene: string | undefined;
+  evidence: string | undefined;
+  sort_field: string | undefined;
+  sort_direction: string | undefined;
+}) => {
+  return extendRequest(API_PREFIX + '/genedmg', {
+    method: 'get',
+    params: {
+      pageSize: pageSize,
+      pageIndex: pageIndex,
+      gene:gene,
+      evidence:evidence,
+      sort_field:sort_field,
+      sort_direction:sort_direction
+    },
+  })
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      return false;
+    });
+};
