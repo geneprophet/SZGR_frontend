@@ -48,13 +48,17 @@ export default [
         component: '@/pages/Advance',
       },
       {
-        path: '/explorecmap/:dataset/:tissue/:sig_index',
-        component: '@/pages/ExploreCMap',
+        path: '/toolkit/',
+        component: '@/pages/Toolkit',
       },
-      {
-        path: '/exploregeo/:dataset/:tissue/:accession',
-        component: '@/pages/ExploreGEO',
-      },
+      // {
+      //   path: '/explorecmap/:dataset/:tissue/:sig_index',
+      //   component: '@/pages/ExploreCMap',
+      // },
+      // {
+      //   path: '/exploregeo/:dataset/:tissue/:accession',
+      //   component: '@/pages/ExploreGEO',
+      // },
       {
         path: '/contact',
         component: '@/pages/Contact',

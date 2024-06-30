@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import styles from './index.less';
-import { getRemoteVariant, getRemoteVariantLike, getRemoteVariantlocus } from "@/pages/VariantOverview/service";
+import {
+  getRemoteVariant,
+  getRemoteVariantLike,
+  getRemoteVariantlocus,
+} from '@/pages/VariantOverview/service';
 import { ApartmentOutlined, SearchOutlined } from '@ant-design/icons';
 import { Parser } from 'json2csv';
 // @ts-ignore
-import { URL_PREFIX,uniqueArray } from '@/common/constants';
+import { URL_PREFIX, uniqueArray } from '@/common/constants';
 import {
   Breadcrumb,
   Col,
@@ -15,11 +19,9 @@ import {
   Space,
   Typography,
 } from 'antd';
-import { ProColumns, ProTable } from "@ant-design/pro-table";
-import {
-  AnalysisIcon
-} from "../../components/Icons/index";
-import { pop } from "echarts/types/src/component/dataZoom/history";
+import { ProColumns, ProTable } from '@ant-design/pro-table';
+import { AnalysisIcon } from '../../components/Icons/index';
+import { pop } from 'echarts/types/src/component/dataZoom/history';
 export default function Page(props: any) {
   const [name, setName] = useState(undefined);
   const [variants, setVariants] = useState(undefined);
@@ -43,127 +45,127 @@ export default function Page(props: any) {
   }, [props]);
 
   useEffect(() => {
-    if (name){
-      if(name == "all"){
+    if (name) {
+      if (name == 'all') {
         setName(undefined);
         getRemoteVariant({
           pageSize: pagesize,
           pageIndex: pageindex,
           vid: undefined,
-          vtype:undefined,
-          pop:undefined,
-          sort_field:undefined,
-          sort_direction:undefined
+          vtype: undefined,
+          pop: undefined,
+          sort_field: undefined,
+          sort_direction: undefined,
         }).then((res) => {
           setLoading(false);
           setVariants(res.data);
           setTotal(res.meta.total);
         });
-      }else if(name.startsWith("rs")){
+      } else if (name.startsWith('rs')) {
         getRemoteVariantLike({
           pageSize: pagesize,
           pageIndex: pageindex,
-          vid:name,
-          vtype:undefined,
-          pop:undefined,
-          sort_field:undefined,
-          sort_direction:undefined
+          vid: name,
+          vtype: undefined,
+          pop: undefined,
+          sort_field: undefined,
+          sort_direction: undefined,
         }).then((res) => {
           // console.log(res.data);
           setLoading(false);
           setVariants(res.data);
           setTotal(res.meta.total);
         });
-      }else if(name=="CV"){
+      } else if (name == 'CV') {
         getRemoteVariantLike({
           pageSize: pagesize,
           pageIndex: pageindex,
-          vid:undefined,
-          vtype:"CV",
-          pop:undefined,
-          sort_field:undefined,
-          sort_direction:undefined
+          vid: undefined,
+          vtype: 'CV',
+          pop: undefined,
+          sort_field: undefined,
+          sort_direction: undefined,
         }).then((res) => {
           // console.log(res.data);
           setLoading(false);
           setVariants(res.data);
           setTotal(res.meta.total);
         });
-      } else if(name=="RV"){
+      } else if (name == 'RV') {
         getRemoteVariantLike({
           pageSize: pagesize,
           pageIndex: pageindex,
-          vid:undefined,
-          vtype:"RV",
-          pop:undefined,
-          sort_field:undefined,
-          sort_direction:undefined
+          vid: undefined,
+          vtype: 'RV',
+          pop: undefined,
+          sort_field: undefined,
+          sort_direction: undefined,
         }).then((res) => {
           // console.log(res.data);
           setLoading(false);
           setVariants(res.data);
           setTotal(res.meta.total);
         });
-      } else if(name=="DNM"){
+      } else if (name == 'DNM') {
         getRemoteVariantLike({
           pageSize: pagesize,
           pageIndex: pageindex,
-          vid:undefined,
-          vtype:"DNM",
-          pop:undefined,
-          sort_field:undefined,
-          sort_direction:undefined
+          vid: undefined,
+          vtype: 'DNM',
+          pop: undefined,
+          sort_field: undefined,
+          sort_direction: undefined,
         }).then((res) => {
           // console.log(res.data);
           setLoading(false);
           setVariants(res.data);
           setTotal(res.meta.total);
         });
-      } else if(name=="CNV"){
+      } else if (name == 'CNV') {
         getRemoteVariantLike({
           pageSize: pagesize,
           pageIndex: pageindex,
-          vid:undefined,
-          vtype:"CNV",
-          pop:undefined,
-          sort_field:undefined,
-          sort_direction:undefined
+          vid: undefined,
+          vtype: 'CNV',
+          pop: undefined,
+          sort_field: undefined,
+          sort_direction: undefined,
         }).then((res) => {
           // console.log(res.data);
           setLoading(false);
           setVariants(res.data);
           setTotal(res.meta.total);
         });
-      } else if(name=="SV"){
+      } else if (name == 'SV') {
         getRemoteVariantLike({
           pageSize: pagesize,
           pageIndex: pageindex,
-          vid:undefined,
-          vtype:"SV",
-          pop:undefined,
-          sort_field:undefined,
-          sort_direction:undefined
+          vid: undefined,
+          vtype: 'SV',
+          pop: undefined,
+          sort_field: undefined,
+          sort_direction: undefined,
         }).then((res) => {
           // console.log(res.data);
           setLoading(false);
           setVariants(res.data);
           setTotal(res.meta.total);
         });
-      } else{
+      } else {
         let regex = /chr(\d+):([\d]+)-([\d]+)/;
         let match = name.match(regex);
-        if (match){
+        if (match) {
           let chromosome = match[1];
           let start = match[2];
           let end = match[3];
           getRemoteVariantlocus({
             pageSize: pagesize,
             pageIndex: pageindex,
-            vchr:chromosome,
-            vs:start,
-            ve:end,
-            sort_field:undefined,
-            sort_direction:undefined
+            vchr: chromosome,
+            vs: start,
+            ve: end,
+            sort_field: undefined,
+            sort_direction: undefined,
           }).then((res) => {
             // console.log(res.data);
             setLoading(false);
@@ -210,8 +212,8 @@ export default function Page(props: any) {
                 vid: keywords.vid,
                 vtype: undefined,
                 pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -230,8 +232,8 @@ export default function Page(props: any) {
                 vid: keywords.vid,
                 vtype: value,
                 pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -289,8 +291,8 @@ export default function Page(props: any) {
                 vid: undefined,
                 vtype: keywords.vtype,
                 pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -309,8 +311,8 @@ export default function Page(props: any) {
                 vid: value,
                 vtype: keywords.vtype,
                 pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -338,30 +340,28 @@ export default function Page(props: any) {
             href={URL_PREFIX + '/explorevariant/' + record.vid}
             target={'_blank'}
           >
-            <Space>
-              {record.vid}
-            </Space>
+            <Space>{record.vid}</Space>
           </a>
         </span>
       ),
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Locus</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Location</strong>,
       key: 'loc',
       dataIndex: 'loc',
       ellipsis: true,
       search: false,
       sorter: true,
-      width:150,
+      width: 150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Chr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Chromosome</strong>,
       key: 'vchr',
       dataIndex: 'vchr',
       ellipsis: true,
       sorter: true,
       search: false,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Start</strong>,
@@ -370,7 +370,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>End</strong>,
@@ -379,25 +379,29 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Effect Allele</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>Effect Allele</strong>
+      ),
       key: 'ea',
       dataIndex: 'ea',
       ellipsis: true,
       search: false,
       sorter: true,
-      width:150,
+      width: 150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Reference Allele</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>Reference Allele</strong>
+      ),
       key: 'noa',
       dataIndex: 'noa',
       ellipsis: true,
       search: false,
       sorter: true,
-      width:150,
+      width: 150,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Beta</strong>,
@@ -406,7 +410,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>p</strong>,
@@ -415,7 +419,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Ancestry</strong>,
@@ -424,7 +428,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: true,
       sorter: true,
-      width:100,
+      width: 100,
       renderFormItem: () => {
         const options = poplist.map((item) => (
           <Select.Option key={item} value={item} type={item}>
@@ -444,8 +448,8 @@ export default function Page(props: any) {
                 vid: keywords.vid,
                 vtype: keywords.vtype,
                 pop: undefined,
-                sort_field:undefined,
-                sort_direction:undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -464,8 +468,8 @@ export default function Page(props: any) {
                 vid: keywords.vid,
                 vtype: keywords.vtype,
                 pop: value,
-                sort_field:undefined,
-                sort_direction:undefined
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -494,7 +498,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Trait</strong>,
@@ -503,7 +507,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:150,
+      width: 150,
     },
 
     {
@@ -513,7 +517,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>#Control</strong>,
@@ -522,7 +526,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>nor</strong>,
@@ -531,7 +535,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>PMID</strong>,
@@ -540,7 +544,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
       render: (text: string, record) => (
         <span>
           <a
@@ -548,9 +552,7 @@ export default function Page(props: any) {
             href={'https://pubmed.ncbi.nlm.nih.gov/' + record.pmid}
             target={'_blank'}
           >
-            <Space>
-              {record.pmid}
-            </Space>
+            <Space>{record.pmid}</Space>
           </a>
         </span>
       ),
@@ -562,8 +564,8 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
-    }
+      width: 100,
+    },
   ];
 
   return (
@@ -578,9 +580,7 @@ export default function Page(props: any) {
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <a href="">
-                <strong style={{ fontFamily: 'sans-serif' }}>
-                  Variants
-                </strong>
+                <strong style={{ fontFamily: 'sans-serif' }}>Variants</strong>
               </a>
             </Breadcrumb.Item>
           </Breadcrumb>
@@ -619,11 +619,11 @@ export default function Page(props: any) {
               getRemoteVariant({
                 pageSize: pagesize,
                 pageIndex: 1,
-                vid:keywords.vid,
-                vtype:keywords.vtype,
-                pop:keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined
+                vid: keywords.vid,
+                vtype: keywords.vtype,
+                pop: keywords.pop,
+                sort_field: undefined,
+                sort_direction: undefined,
               }).then((res) => {
                 setVariants(res.data);
                 setLoading(false);
@@ -635,11 +635,11 @@ export default function Page(props: any) {
               getRemoteVariant({
                 pageSize: 10,
                 pageIndex: 1,
-                vid:undefined,
-                vtype:undefined,
-                pop:undefined,
-                sort_field:undefined,
-                sort_direction:undefined
+                vid: undefined,
+                vtype: undefined,
+                pop: undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
               }).then((res) => {
                 setVariants(res.data);
                 setLoading(false);
@@ -656,13 +656,13 @@ export default function Page(props: any) {
               setKeywords({ ...keywords, sort_field: sorter.field });
               setKeywords({ ...keywords, sort_direction: sorter.order });
               setLoading(true);
-              if (name){
+              if (name) {
                 getRemoteVariantLike({
                   pageSize: pagination.pageSize,
                   pageIndex: pagination.current,
-                  vid:keywords.vid,
-                  vtype:keywords.vtype,
-                  pop:keywords.pop,
+                  vid: keywords.vid,
+                  vtype: keywords.vtype,
+                  pop: keywords.pop,
                   sort_field: sorter.field,
                   sort_direction: sorter.order,
                 }).then((res) => {
@@ -670,13 +670,13 @@ export default function Page(props: any) {
                   setLoading(false);
                   setTotal(res.meta.total);
                 });
-              }else {
+              } else {
                 getRemoteVariant({
                   pageSize: pagination.pageSize,
                   pageIndex: pagination.current,
-                  vid:keywords.vid,
-                  vtype:keywords.vtype,
-                  pop:keywords.pop,
+                  vid: keywords.vid,
+                  vtype: keywords.vtype,
+                  pop: keywords.pop,
                   sort_field: sorter.field,
                   sort_direction: sorter.order,
                 }).then((res) => {
@@ -723,10 +723,10 @@ export default function Page(props: any) {
               selectedRowKeys: selectitemsrowkey,
             }}
             tableAlertRender={({
-                                 selectedRowKeys,
-                                 selectedRows,
-                                 onCleanSelected,
-                               }) => {
+              selectedRowKeys,
+              selectedRows,
+              onCleanSelected,
+            }) => {
               const onCancelselected = () => {
                 setSelectitems([]);
                 setSelectitemsrowkey([]);
@@ -745,10 +745,10 @@ export default function Page(props: any) {
               );
             }}
             tableAlertOptionRender={({
-                                       selectedRowKeys,
-                                       selectedRows,
-                                       onCleanSelected,
-                                     }) => {
+              selectedRowKeys,
+              selectedRows,
+              onCleanSelected,
+            }) => {
               return (
                 <Space size={20}>
                   <a
@@ -779,12 +779,9 @@ export default function Page(props: any) {
                       element.setAttribute(
                         'href',
                         'data:text/csv;charset=utf-8,' +
-                        encodeURIComponent(csv),
+                          encodeURIComponent(csv),
                       );
-                      element.setAttribute(
-                        'download',
-                        'SZGR_variants.csv',
-                      );
+                      element.setAttribute('download', 'SZGR_variants.csv');
                       element.style.display = 'none';
                       document.body.appendChild(element);
                       element.click();

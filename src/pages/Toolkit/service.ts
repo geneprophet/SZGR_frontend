@@ -23,30 +23,33 @@ const errorHandler = function (error: any) {
 };
 export const extendRequest = extend({ errorHandler });
 
-export const getRemoteGEOZscoreUp = async ({
-                                              pageSize,
-                                              pageIndex,
-                                              accession,
-                                              sig_index,
-                                              sort_field,
-                                              sort_direction
-                                            }: {
+export const getRemoteCoexpression = async ({
+  pageSize,
+  pageIndex,
+  vid,
+  vtype,
+  pop,
+  sort_field,
+  sort_direction,
+}: {
   pageSize: number | undefined;
   pageIndex: number | undefined;
-  accession: string | undefined;
-  sig_index: string | undefined;
+  vid: string | undefined;
+  vtype: string | undefined;
+  pop: string | undefined;
   sort_field: string | undefined;
   sort_direction: string | undefined;
 }) => {
-  return extendRequest(API_PREFIX + '/geozscoreup', {
+  return extendRequest(API_PREFIX + '/variantcuration', {
     method: 'get',
     params: {
       pageSize: pageSize,
       pageIndex: pageIndex,
-      accession: accession,
-      sig_index: sig_index,
-      sort_field:sort_field,
-      sort_direction:sort_direction
+      vid: vid,
+      vtype: vtype,
+      pop: pop,
+      sort_field: sort_field,
+      sort_direction: sort_direction,
     },
   })
     .then(function (response) {
@@ -56,30 +59,33 @@ export const getRemoteGEOZscoreUp = async ({
       return false;
     });
 };
-export const getRemoteGEOZscoreDown = async ({
-                                             pageSize,
-                                             pageIndex,
-                                             accession,
-                                             sig_index,
-                                             sort_field,
-                                             sort_direction
-                                           }: {
+export const getRemoteCoexpressionLike = async ({
+  pageSize,
+  pageIndex,
+  vid,
+  vtype,
+  pop,
+  sort_field,
+  sort_direction,
+}: {
   pageSize: number | undefined;
   pageIndex: number | undefined;
-  accession: string | undefined;
-  sig_index: string | undefined;
+  vid: string | undefined;
+  vtype: string | undefined;
+  pop: string | undefined;
   sort_field: string | undefined;
   sort_direction: string | undefined;
 }) => {
-  return extendRequest(API_PREFIX + '/geozscoredown', {
+  return extendRequest(API_PREFIX + '/variantcurationlike', {
     method: 'get',
     params: {
       pageSize: pageSize,
       pageIndex: pageIndex,
-      accession: accession,
-      sig_index: sig_index,
-      sort_field:sort_field,
-      sort_direction:sort_direction
+      vid: vid,
+      vtype: vtype,
+      pop: pop,
+      sort_field: sort_field,
+      sort_direction: sort_direction,
     },
   })
     .then(function (response) {

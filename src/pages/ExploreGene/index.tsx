@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import {
   getRemoteGenecrispr,
   getRemoteGenecura,
   getRemoteGenecuraLike,
-  getRemoteGenedrug, getRemoteGeneRNAseq
-} from "@/pages/ExploreGene/service";
-import { Breadcrumb, Col, Divider, Row, Select, Space, Table, Typography } from "antd";
+  getRemoteGenedrug,
+  getRemoteGeneRNAseq,
+} from '@/pages/ExploreGene/service';
 import {
-  AnalysisIcon,DetailIcon
-} from "../../components/Icons/index";
-import { URL_PREFIX ,uniqueArray} from '@/common/constants';
-import { ProTable } from "@ant-design/pro-table";
+  Breadcrumb,
+  Col,
+  Divider,
+  Image,
+  Row,
+  Select,
+  Space,
+  Table,
+  Typography,
+} from 'antd';
+import { AnalysisIcon, DetailIcon } from '../../components/Icons/index';
+import { URL_PREFIX, uniqueArray } from '@/common/constants';
+import { ProTable } from '@ant-design/pro-table';
 import { Parser } from 'json2csv';
 const { Title, Paragraph, Text, Link } = Typography;
 
@@ -50,62 +59,60 @@ export default function Page(props: any) {
     gene: string | undefined;
     sort_field: string | undefined;
     sort_direction: string | undefined;
-  };
+  }
   const [keywords, setKeywords] = useState<SearchKeywords>({});
-  useEffect(()=>{
-    if(name){
-      if (name == "all"){
+  useEffect(() => {
+    if (name) {
+      if (name == 'all') {
         setName(undefined);
         getRemoteGenecura({
           pageSize: pagesize,
           pageIndex: pageindex,
           gene: undefined,
           sort_field: undefined,
-          sort_direction: undefined
+          sort_direction: undefined,
         }).then((res) => {
           setLoading(false);
           setGenecura(res.data);
           setTotal(res.meta.total);
         });
-      }else {
+      } else {
         getRemoteGenecuraLike({
           pageSize: pagesize,
           pageIndex: pageindex,
           gene: name,
           sort_field: undefined,
-          sort_direction: undefined
+          sort_direction: undefined,
         }).then((res) => {
           setLoading(false);
           setGenecura(res.data);
           setTotal(res.meta.total);
         });
       }
-
     }
-
-  },[name]);
-  useEffect(()=>{
-    if(name){
-      if (name == "all"){
+  }, [name]);
+  useEffect(() => {
+    if (name) {
+      if (name == 'all') {
         setName(undefined);
         getRemoteGenecrispr({
           pageSize: pagesize2,
           pageIndex: pageindex2,
           gene: undefined,
           sort_field: undefined,
-          sort_direction: undefined
+          sort_direction: undefined,
         }).then((res) => {
           setLoading2(false);
           setGene2(res.data);
           setTotal2(res.meta.total);
         });
-      }else {
+      } else {
         getRemoteGenecrispr({
           pageSize: pagesize2,
           pageIndex: pageindex2,
           gene: name,
           sort_field: undefined,
-          sort_direction: undefined
+          sort_direction: undefined,
         }).then((res) => {
           setLoading2(false);
           setGene2(res.data);
@@ -113,30 +120,29 @@ export default function Page(props: any) {
         });
       }
     }
-
-  },[name]);
-  useEffect(()=>{
-    if(name){
-      if (name == "all"){
+  }, [name]);
+  useEffect(() => {
+    if (name) {
+      if (name == 'all') {
         setName(undefined);
         getRemoteGenedrug({
           pageSize: pagesize3,
           pageIndex: pageindex3,
           gene: undefined,
           sort_field: undefined,
-          sort_direction: undefined
+          sort_direction: undefined,
         }).then((res) => {
           setLoading3(false);
           setGene3(res.data);
           setTotal3(res.meta.total);
         });
-      }else {
+      } else {
         getRemoteGenedrug({
           pageSize: pagesize3,
           pageIndex: pageindex3,
           gene: name,
           sort_field: undefined,
-          sort_direction: undefined
+          sort_direction: undefined,
         }).then((res) => {
           setLoading3(false);
           setGene3(res.data);
@@ -144,30 +150,29 @@ export default function Page(props: any) {
         });
       }
     }
-
-  },[name]);
-  useEffect(()=>{
-    if(name){
-      if (name == "all"){
+  }, [name]);
+  useEffect(() => {
+    if (name) {
+      if (name == 'all') {
         setName(undefined);
         getRemoteGeneRNAseq({
           pageSize: pagesize4,
           pageIndex: pageindex4,
           gene: undefined,
           sort_field: undefined,
-          sort_direction: undefined
+          sort_direction: undefined,
         }).then((res) => {
           setLoading4(false);
           setGene4(res.data);
           setTotal4(res.meta.total);
         });
-      }else {
+      } else {
         getRemoteGeneRNAseq({
           pageSize: pagesize4,
           pageIndex: pageindex4,
           gene: name,
           sort_field: undefined,
-          sort_direction: undefined
+          sort_direction: undefined,
         }).then((res) => {
           setLoading4(false);
           setGene4(res.data);
@@ -175,9 +180,7 @@ export default function Page(props: any) {
         });
       }
     }
-
-  },[name]);
-
+  }, [name]);
 
   const [genelist, setGenelist] = useState([]);
   const [selectitems, setSelectitems] = useState([]);
@@ -188,7 +191,7 @@ export default function Page(props: any) {
   const [selectitems3, setSelectitems3] = useState([]);
   const [selectitemsrowkey3, setSelectitemsrowkey3] = useState([]);
 
-  const columns =[
+  const columns = [
     Table.SELECTION_COLUMN,
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
@@ -197,7 +200,7 @@ export default function Page(props: any) {
       ellipsis: true,
       width: 150,
       search: true,
-      sorter:true,
+      sorter: true,
       renderFormItem: () => {
         const options = genelist.map((item) => (
           <Select.Option key={item} value={item} type={item}>
@@ -215,8 +218,8 @@ export default function Page(props: any) {
                 pageSize: 100,
                 pageIndex: 1,
                 gene: undefined,
-                sort_field:undefined,
-                sort_direction:undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -232,9 +235,9 @@ export default function Page(props: any) {
               const remoteKeywords = await getRemoteGenecuraLike({
                 pageSize: 100,
                 pageIndex: 1,
-                gene:value,
-                sort_field:undefined,
-                sort_direction:undefined,
+                gene: value,
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -256,16 +259,17 @@ export default function Page(props: any) {
         );
       },
       render: (text: string, record: any) => {
-          return (
-            <span>
-          <a href={"https://www.ncbi.nlm.nih.gov/gene/?term=" + record.gene} target={'_blank'}>
-            <Space style={{ fontWeight: 'bold' }}>
-              {record.gene}
-            </Space>
-          </a>
+        return (
+          <span>
+            <a
+              href={'https://www.ncbi.nlm.nih.gov/gene/?term=' + record.gene}
+              target={'_blank'}
+            >
+              <Space style={{ fontWeight: 'bold' }}>{record.gene}</Space>
+            </a>
           </span>
-          )
-      }
+        );
+      },
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Cell Type</strong>,
@@ -273,7 +277,7 @@ export default function Page(props: any) {
       dataIndex: 'celltype',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Species</strong>,
@@ -281,7 +285,7 @@ export default function Page(props: any) {
       dataIndex: 'species',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Trait</strong>,
@@ -289,7 +293,7 @@ export default function Page(props: any) {
       dataIndex: 'trait',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>PMID</strong>,
@@ -297,7 +301,7 @@ export default function Page(props: any) {
       dataIndex: 'pmid',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
       render: (text: string, record) => (
         <span>
           <a
@@ -305,9 +309,7 @@ export default function Page(props: any) {
             href={'https://pubmed.ncbi.nlm.nih.gov/' + record.pmid}
             target={'_blank'}
           >
-            <Space>
-              {record.pmid}
-            </Space>
+            <Space>{record.pmid}</Space>
           </a>
         </span>
       ),
@@ -318,10 +320,10 @@ export default function Page(props: any) {
       dataIndex: 'year',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
   ];
-  const columns2 =[
+  const columns2 = [
     Table.SELECTION_COLUMN,
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>technology</strong>,
@@ -330,7 +332,7 @@ export default function Page(props: any) {
       ellipsis: true,
       width: 150,
       search: true,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>grna</strong>,
@@ -338,7 +340,7 @@ export default function Page(props: any) {
       dataIndex: 'grna',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>gene</strong>,
@@ -346,7 +348,7 @@ export default function Page(props: any) {
       dataIndex: 'gene',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>chr</strong>,
@@ -354,7 +356,7 @@ export default function Page(props: any) {
       dataIndex: 'chr',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>start</strong>,
@@ -362,7 +364,7 @@ export default function Page(props: any) {
       dataIndex: 'start',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>end</strong>,
@@ -370,7 +372,7 @@ export default function Page(props: any) {
       dataIndex: 'end',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>diff</strong>,
@@ -378,7 +380,7 @@ export default function Page(props: any) {
       dataIndex: 'diff',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>log2fc</strong>,
@@ -386,7 +388,7 @@ export default function Page(props: any) {
       dataIndex: 'log2fc',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>p</strong>,
@@ -394,7 +396,7 @@ export default function Page(props: any) {
       dataIndex: 'p',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>fdr</strong>,
@@ -402,7 +404,7 @@ export default function Page(props: any) {
       dataIndex: 'fdr',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>celltype</strong>,
@@ -410,7 +412,7 @@ export default function Page(props: any) {
       dataIndex: 'celltype',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>PMID</strong>,
@@ -418,7 +420,7 @@ export default function Page(props: any) {
       dataIndex: 'pmid',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
       render: (text: string, record) => (
         <span>
           <a
@@ -426,9 +428,7 @@ export default function Page(props: any) {
             href={'https://pubmed.ncbi.nlm.nih.gov/' + record.pmid}
             target={'_blank'}
           >
-            <Space>
-              {record.pmid}
-            </Space>
+            <Space>{record.pmid}</Space>
           </a>
         </span>
       ),
@@ -439,10 +439,10 @@ export default function Page(props: any) {
       dataIndex: 'year',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
   ];
-  const columns3 =[
+  const columns3 = [
     Table.SELECTION_COLUMN,
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>gene</strong>,
@@ -451,7 +451,7 @@ export default function Page(props: any) {
       ellipsis: true,
       width: 150,
       search: true,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>ensemble</strong>,
@@ -459,7 +459,7 @@ export default function Page(props: any) {
       dataIndex: 'ensemble',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>chembl_id</strong>,
@@ -467,7 +467,7 @@ export default function Page(props: any) {
       dataIndex: 'chembl_id',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>drug_type</strong>,
@@ -475,7 +475,7 @@ export default function Page(props: any) {
       dataIndex: 'drug_type',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>drug_name</strong>,
@@ -483,15 +483,17 @@ export default function Page(props: any) {
       dataIndex: 'drug_name',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>clinical_trail</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>clinical_trail</strong>
+      ),
       key: 'clinical_trail',
       dataIndex: 'clinical_trail',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>efo_id</strong>,
@@ -499,7 +501,7 @@ export default function Page(props: any) {
       dataIndex: 'efo_id',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>efo_term</strong>,
@@ -507,7 +509,7 @@ export default function Page(props: any) {
       dataIndex: 'efo_term',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>phase_ind</strong>,
@@ -515,7 +517,7 @@ export default function Page(props: any) {
       dataIndex: 'phase_ind',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>mesh</strong>,
@@ -523,7 +525,7 @@ export default function Page(props: any) {
       dataIndex: 'mesh',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>warning</strong>,
@@ -531,7 +533,7 @@ export default function Page(props: any) {
       dataIndex: 'warning',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>action</strong>,
@@ -539,34 +541,40 @@ export default function Page(props: any) {
       dataIndex: 'action',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>mechanism_comment</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>mechanism_comment</strong>
+      ),
       key: 'mechanism_comment',
       dataIndex: 'mechanism_comment',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>mechanism_action</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>mechanism_action</strong>
+      ),
       key: 'mechanism_action',
       dataIndex: 'mechanism_action',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>target_chembl_id</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>target_chembl_id</strong>
+      ),
       key: 'target_chembl_id',
       dataIndex: 'target_chembl_id',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
   ];
-  const columns4 =[
+  const columns4 = [
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
       key: 'gene',
@@ -574,7 +582,7 @@ export default function Page(props: any) {
       ellipsis: true,
       width: 150,
       search: true,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>log2fc</strong>,
@@ -582,7 +590,7 @@ export default function Page(props: any) {
       dataIndex: 'log2fc',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>p</strong>,
@@ -590,7 +598,7 @@ export default function Page(props: any) {
       dataIndex: 'p',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>FDR</strong>,
@@ -598,7 +606,7 @@ export default function Page(props: any) {
       dataIndex: 'fdr',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Cell Type</strong>,
@@ -606,7 +614,7 @@ export default function Page(props: any) {
       dataIndex: 'celltype',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Tissue</strong>,
@@ -614,7 +622,7 @@ export default function Page(props: any) {
       dataIndex: 'tissue',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Study</strong>,
@@ -622,10 +630,9 @@ export default function Page(props: any) {
       dataIndex: 'study',
       ellipsis: true,
       search: false,
-      sorter:true,
+      sorter: true,
     },
   ];
-
 
   return (
     <div>
@@ -639,9 +646,7 @@ export default function Page(props: any) {
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <a href="">
-                <strong style={{ fontFamily: 'sans-serif' }}>
-                  Gene
-                </strong>
+                <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>
               </a>
             </Breadcrumb.Item>
           </Breadcrumb>
@@ -684,7 +689,7 @@ export default function Page(props: any) {
               getRemoteGeneRNAseq({
                 pageSize: pagination.pageSize,
                 pageIndex: pagination.current,
-                gene:  keywords.gene,
+                gene: keywords.gene,
                 sort_field: sorter.field,
                 sort_direction: sorter.order,
               }).then((res) => {
@@ -736,12 +741,12 @@ export default function Page(props: any) {
                 setTotal2(res.meta.total);
               });
             }}
-            onReset={()=>{
+            onReset={() => {
               setLoading2(true);
               getRemoteGenecrispr({
                 pageSize: 10,
                 pageIndex: 1,
-                gene:undefined,
+                gene: undefined,
                 sort_field: undefined,
                 sort_direction: undefined,
               }).then((res) => {
@@ -762,7 +767,7 @@ export default function Page(props: any) {
               getRemoteGenecrispr({
                 pageSize: pagination.pageSize,
                 pageIndex: pagination.current,
-                gene:  keywords.gene,
+                gene: keywords.gene,
                 sort_field: sorter.field,
                 sort_direction: sorter.order,
               }).then((res) => {
@@ -770,13 +775,14 @@ export default function Page(props: any) {
                 setLoading2(false);
                 setTotal2(res.meta.total);
               });
-
             }}
             rowSelection={{
               fixed: true,
               onSelect: (record, selected, selectedRows, nativeEvent) => {
                 if (selected) {
-                  let a = Array.from(new Set(selectitems2.concat(selectedRows)));
+                  let a = Array.from(
+                    new Set(selectitems2.concat(selectedRows)),
+                  );
                   let b = a.filter((res) => res != undefined);
                   setSelectitems2(b);
                   let c = b.map((value) => value.id + 'table2');
@@ -809,10 +815,10 @@ export default function Page(props: any) {
               selectedRowKeys: selectitemsrowkey2,
             }}
             tableAlertRender={({
-                                 selectedRowKeys,
-                                 selectedRows,
-                                 onCleanSelected,
-                               }) => {
+              selectedRowKeys,
+              selectedRows,
+              onCleanSelected,
+            }) => {
               const onCancelselected = () => {
                 setSelectitems2([]);
                 setSelectitemsrowkey2([]);
@@ -831,10 +837,10 @@ export default function Page(props: any) {
               );
             }}
             tableAlertOptionRender={({
-                                       selectedRowKeys,
-                                       selectedRows,
-                                       onCleanSelected,
-                                     }) => {
+              selectedRowKeys,
+              selectedRows,
+              onCleanSelected,
+            }) => {
               return (
                 <Space size={20}>
                   <a
@@ -853,12 +859,9 @@ export default function Page(props: any) {
                       element.setAttribute(
                         'href',
                         'data:text/csv;charset=utf-8,' +
-                        encodeURIComponent(csv),
+                          encodeURIComponent(csv),
                       );
-                      element.setAttribute(
-                        'download',
-                        'Gene.csv',
-                      );
+                      element.setAttribute('download', 'Gene.csv');
                       element.style.display = 'none';
                       document.body.appendChild(element);
                       element.click();
@@ -914,12 +917,12 @@ export default function Page(props: any) {
                 setTotal(res.meta.total);
               });
             }}
-            onReset={()=>{
+            onReset={() => {
               setLoading(true);
               getRemoteGenecura({
                 pageSize: 10,
                 pageIndex: 1,
-                gene:undefined,
+                gene: undefined,
                 sort_field: undefined,
                 sort_direction: undefined,
               }).then((res) => {
@@ -940,7 +943,7 @@ export default function Page(props: any) {
               getRemoteGenecura({
                 pageSize: pagination.pageSize,
                 pageIndex: pagination.current,
-                gene:  keywords.gene,
+                gene: keywords.gene,
                 sort_field: sorter.field,
                 sort_direction: sorter.order,
               }).then((res) => {
@@ -948,7 +951,6 @@ export default function Page(props: any) {
                 setLoading(false);
                 setTotal(res.meta.total);
               });
-
             }}
             rowSelection={{
               fixed: true,
@@ -987,10 +989,10 @@ export default function Page(props: any) {
               selectedRowKeys: selectitemsrowkey,
             }}
             tableAlertRender={({
-                                 selectedRowKeys,
-                                 selectedRows,
-                                 onCleanSelected,
-                               }) => {
+              selectedRowKeys,
+              selectedRows,
+              onCleanSelected,
+            }) => {
               const onCancelselected = () => {
                 setSelectitems([]);
                 setSelectitemsrowkey([]);
@@ -1009,10 +1011,10 @@ export default function Page(props: any) {
               );
             }}
             tableAlertOptionRender={({
-                                       selectedRowKeys,
-                                       selectedRows,
-                                       onCleanSelected,
-                                     }) => {
+              selectedRowKeys,
+              selectedRows,
+              onCleanSelected,
+            }) => {
               return (
                 <Space size={20}>
                   <a
@@ -1031,12 +1033,9 @@ export default function Page(props: any) {
                       element.setAttribute(
                         'href',
                         'data:text/csv;charset=utf-8,' +
-                        encodeURIComponent(csv),
+                          encodeURIComponent(csv),
                       );
-                      element.setAttribute(
-                        'download',
-                        'Gene_curation.csv',
-                      );
+                      element.setAttribute('download', 'Gene_curation.csv');
                       element.style.display = 'none';
                       document.body.appendChild(element);
                       element.click();
@@ -1053,6 +1052,23 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider />
+      <Row>
+        <Col md={12}>
+          <Image />
+        </Col>
+        <Col md={12}>
+          <Image />
+        </Col>
+        <Col md={12}>
+          <Image />
+        </Col>
+        <Col md={12}>
+          <Image />
+        </Col>
+        <Col md={12}>
+          <Image />
+        </Col>
+      </Row>
       <Row>
         <Col md={4}>
           <Title level={2}>Drug</Title>
@@ -1092,12 +1108,12 @@ export default function Page(props: any) {
                 setTotal3(res.meta.total);
               });
             }}
-            onReset={()=>{
+            onReset={() => {
               setLoading3(true);
               getRemoteGenedrug({
                 pageSize: 10,
                 pageIndex: 1,
-                gene:undefined,
+                gene: undefined,
                 sort_field: undefined,
                 sort_direction: undefined,
               }).then((res) => {
@@ -1118,7 +1134,7 @@ export default function Page(props: any) {
               getRemoteGenedrug({
                 pageSize: pagination.pageSize,
                 pageIndex: pagination.current,
-                gene:  keywords.gene,
+                gene: keywords.gene,
                 sort_field: sorter.field,
                 sort_direction: sorter.order,
               }).then((res) => {
@@ -1131,7 +1147,9 @@ export default function Page(props: any) {
               fixed: true,
               onSelect: (record, selected, selectedRows, nativeEvent) => {
                 if (selected) {
-                  let a = Array.from(new Set(selectitems3.concat(selectedRows)));
+                  let a = Array.from(
+                    new Set(selectitems3.concat(selectedRows)),
+                  );
                   let b = a.filter((res) => res != undefined);
                   setSelectitems3(b);
                   let c = b.map((value) => value.id + 'table3');
@@ -1164,10 +1182,10 @@ export default function Page(props: any) {
               selectedRowKeys: selectitemsrowkey3,
             }}
             tableAlertRender={({
-                                 selectedRowKeys,
-                                 selectedRows,
-                                 onCleanSelected,
-                               }) => {
+              selectedRowKeys,
+              selectedRows,
+              onCleanSelected,
+            }) => {
               const onCancelselected = () => {
                 setSelectitems3([]);
                 setSelectitemsrowkey3([]);
@@ -1186,10 +1204,10 @@ export default function Page(props: any) {
               );
             }}
             tableAlertOptionRender={({
-                                       selectedRowKeys,
-                                       selectedRows,
-                                       onCleanSelected,
-                                     }) => {
+              selectedRowKeys,
+              selectedRows,
+              onCleanSelected,
+            }) => {
               return (
                 <Space size={20}>
                   <a
@@ -1208,12 +1226,9 @@ export default function Page(props: any) {
                       element.setAttribute(
                         'href',
                         'data:text/csv;charset=utf-8,' +
-                        encodeURIComponent(csv),
+                          encodeURIComponent(csv),
                       );
-                      element.setAttribute(
-                        'download',
-                        'Gene.csv',
-                      );
+                      element.setAttribute('download', 'Gene.csv');
                       element.style.display = 'none';
                       document.body.appendChild(element);
                       element.click();
