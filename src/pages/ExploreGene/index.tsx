@@ -33,31 +33,31 @@ export default function Page(props: any) {
     setName(props.match.params.name);
   }, [props]);
 
-  const [genecura, setGenecura] = useState(undefined);
+  const [genecura, setGenecura] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [total, setTotal] = useState(0);
   const [pagesize, setPagesize] = useState(10);
   const [pageindex, setPageindex] = useState(1);
 
-  const [gene2, setGene2] = useState(undefined);
+  const [gene2, setGene2] = useState([]);
   const [loading2, setLoading2] = useState<boolean>(true);
   const [total2, setTotal2] = useState(0);
   const [pagesize2, setPagesize2] = useState(10);
   const [pageindex2, setPageindex2] = useState(1);
 
-  const [gene3, setGene3] = useState(undefined);
+  const [gene3, setGene3] = useState([]);
   const [loading3, setLoading3] = useState<boolean>(true);
   const [total3, setTotal3] = useState(0);
   const [pagesize3, setPagesize3] = useState(10);
   const [pageindex3, setPageindex3] = useState(1);
 
-  const [gene4, setGene4] = useState(undefined);
+  const [gene4, setGene4] = useState([]);
   const [loading4, setLoading4] = useState<boolean>(true);
   const [total4, setTotal4] = useState(0);
   const [pagesize4, setPagesize4] = useState(10);
   const [pageindex4, setPageindex4] = useState(1);
 
-  const [gene5, setGene5] = useState(undefined);
+  const [gene5, setGene5] = useState([]);
   const [loading5, setLoading5] = useState<boolean>(true);
   const [total5, setTotal5] = useState(0);
   const [pagesize5, setPagesize5] = useState(10);
@@ -765,12 +765,12 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider />
-      <Row>
+      <Row style={{display: gene4.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>RNA-seq</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: gene4.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns4}
@@ -814,12 +814,12 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider />
-      <Row>
+      <Row style={{display: gene2.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>CRISPR</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: gene2.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns2}
@@ -892,12 +892,12 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider />
-      <Row>
+      <Row style={{display: genecura.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>Curation</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: genecura.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns}
@@ -1157,12 +1157,12 @@ export default function Page(props: any) {
         />
       </Row>
       <Divider/>
-      <Row>
+      <Row style={{display: gene5.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>DEG</Title>
         </Col>
       </Row>
-      <Row>
+      <Row style={{display: gene5.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns5}
@@ -1235,12 +1235,12 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider/>
-      <Row>
+      <Row style={{display: gene3.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>Drug</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: gene3.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns3}

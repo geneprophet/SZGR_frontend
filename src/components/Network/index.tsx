@@ -25,7 +25,7 @@ export default function Page(props: any) {
       },
       plotOptions: {
         networkgraph: {
-          // keys: ['from', 'to'],
+          keys: ['from', 'to'],
           layoutAlgorithm: {
             enableSimulation: true,
           },
@@ -62,12 +62,12 @@ export default function Page(props: any) {
       },
     ];
     // console.log(props.network);
-    // if (props.network.data){
     //TODO://修改高度,加图例
     setState({
       chartOptions: {
         series: series,
-        chart: { height: props.height, width: props.width },
+        chart: { height: 600,
+          width: (window.innerWidth/3)*2, },
         legend: {
           layout: 'vertical',
           align: 'right',

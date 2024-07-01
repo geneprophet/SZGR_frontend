@@ -166,7 +166,7 @@ export default function Page(props: any) {
         return (
           <span>
             <a
-              href={'https://www.ncbi.nlm.nih.gov/gene/?term=' + record.gene}
+              href={URL_PREFIX + '/exploregene/'  + record.gene}
               target={'_blank'}
             >
               <Space style={{ fontWeight: 'bold' }}>{record.gene}</Space>

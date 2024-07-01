@@ -28,37 +28,37 @@ import {
 import { getRemoteVariant, getRemoteVariantLike } from "@/pages/VariantOverview/service";
 export default function Page(props: any) {
   const [name, setName] = useState(undefined);
-  const [variants, setVariants] = useState(undefined);
+  const [variants, setVariants] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [total, setTotal] = useState(0);
   const [pagesize, setPagesize] = useState(10);
   const [pageindex, setPageindex] = useState(1);
 
-  const [variants2, setVariants2] = useState(undefined);
+  const [variants2, setVariants2] = useState([]);
   const [loading2, setLoading2] = useState<boolean>(true);
   const [total2, setTotal2] = useState(0);
   const [pagesize2, setPagesize2] = useState(10);
   const [pageindex2, setPageindex2] = useState(1);
 
-  const [variants3, setVariants3] = useState(undefined);
+  const [variants3, setVariants3] = useState([]);
   const [loading3, setLoading3] = useState<boolean>(true);
   const [total3, setTotal3] = useState(0);
   const [pagesize3, setPagesize3] = useState(10);
   const [pageindex3, setPageindex3] = useState(1);
 
-  const [variants4, setVariants4] = useState(undefined);
+  const [variants4, setVariants4] = useState([]);
   const [loading4, setLoading4] = useState<boolean>(true);
   const [total4, setTotal4] = useState(0);
   const [pagesize4, setPagesize4] = useState(10);
   const [pageindex4, setPageindex4] = useState(1);
 
-  const [variants5, setVariants5] = useState(undefined);
+  const [variants5, setVariants5] = useState([]);
   const [loading5, setLoading5] = useState<boolean>(true);
   const [total5, setTotal5] = useState(0);
   const [pagesize5, setPagesize5] = useState(10);
   const [pageindex5, setPageindex5] = useState(1);
 
-  const [variants6, setVariants6] = useState(undefined);
+  const [variants6, setVariants6] = useState([]);
   const [loading6, setLoading6] = useState<boolean>(true);
   const [total6, setTotal6] = useState(0);
   const [pagesize6, setPagesize6] = useState(10);
@@ -313,7 +313,7 @@ export default function Page(props: any) {
   const columns = [
     // Table.SELECTION_COLUMN,
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>vid</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Variants</strong>,
       key: 'vid',
       dataIndex: 'vid',
       ellipsis: true,
@@ -322,7 +322,7 @@ export default function Page(props: any) {
       search: false,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>alle</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Allele</strong>,
       key: 'alle',
       dataIndex: 'alle',
       ellipsis: true,
@@ -331,7 +331,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Chr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Chromosome</strong>,
       key: 'vchr',
       dataIndex: 'vchr',
       ellipsis: true,
@@ -349,7 +349,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>afr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>AFR Frequency</strong>,
       key: 'afr',
       dataIndex: 'afr',
       ellipsis: true,
@@ -358,7 +358,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>amr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>AMR Frequency</strong>,
       key: 'amr',
       dataIndex: 'amr',
       ellipsis: true,
@@ -367,7 +367,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>eas</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>EAS Frequency</strong>,
       key: 'eas',
       dataIndex: 'eas',
       ellipsis: true,
@@ -376,7 +376,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>eur</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}> EUR Frequency</strong>,
       key: 'eur',
       dataIndex: 'eur',
       ellipsis: true,
@@ -385,7 +385,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>sas</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>SAS Frequency</strong>,
       key: 'sas',
       dataIndex: 'sas',
       ellipsis: true,
@@ -394,7 +394,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>cadd</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>CADD PHRED</strong>,
       key: 'cadd',
       dataIndex: 'cadd',
       ellipsis: true,
@@ -403,7 +403,7 @@ export default function Page(props: any) {
       width:100
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>fit</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>fitCons Fitness Score</strong>,
       key: 'fit',
       dataIndex: 'fit',
       ellipsis: true,
@@ -413,7 +413,7 @@ export default function Page(props: any) {
     },
 
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>eigen</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>EIGEN Score</strong>,
       key: 'eigen',
       dataIndex: 'eigen',
       ellipsis: true,
@@ -422,7 +422,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>pc</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>EIGEN PC Score</strong>,
       key: 'pc',
       dataIndex: 'pc',
       ellipsis: true,
@@ -431,7 +431,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>funseq</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>FunSeq2 Non-coding Score</strong>,
       key: 'funseq',
       dataIndex: 'funseq',
       ellipsis: true,
@@ -443,146 +443,24 @@ export default function Page(props: any) {
   const columns2 = [
     Table.SELECTION_COLUMN,
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Variant Type</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Variants Type</strong>,
       key: 'vtype',
       dataIndex: 'vtype',
       ellipsis: true,
       width: 120,
       sorter: true,
-      renderFormItem: () => {
-        const options = vtypelist.map((item) => (
-          <Select.Option key={item} value={item} type={item}>
-            {item}
-          </Select.Option>
-        ));
-        return (
-          <Select
-            key={'vtypeSelect'}
-            showSearch={true}
-            placeholder={'input and select a type'}
-            filterOption={false}
-            onFocus={async () => {
-              const remoteKeywords = await getRemoteVariant({
-                pageSize: 1000,
-                pageIndex: 1,
-                vid: keywords.vid,
-                vtype: undefined,
-                pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined,
-              });
-              if (remoteKeywords) {
-                const nameList = new Set();
-                remoteKeywords.data.forEach(function (v) {
-                  if (v) {
-                    nameList.add(v.vtype);
-                  }
-                });
-                setVtypelist(nameList);
-              }
-            }}
-            onSearch={async (value: string) => {
-              const remoteKeywords = await getRemoteVariantLike({
-                pageSize: 100,
-                pageIndex: 1,
-                vid: keywords.vid,
-                vtype: value,
-                pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined
-              });
-              if (remoteKeywords) {
-                const nameList = new Set();
-                remoteKeywords.data.forEach(function (v) {
-                  if (v) {
-                    nameList.add(v.vtype);
-                  }
-                });
-                setVtypelist(nameList);
-              }
-            }}
-            onChange={(value) => {
-              setKeywords({ ...keywords, vtype: value });
-              // console.log(value)
-            }}
-          >
-            {options}
-          </Select>
-        );
-      },
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Variant ID</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Variants</strong>,
       key: 'vid',
       dataIndex: 'vid',
       ellipsis: true,
       width: 150,
       search: true,
       sorter: true,
-      renderFormItem: () => {
-        const options = vidlist.map((item) => (
-          <Select.Option key={item} value={item} type={item}>
-            {item}
-          </Select.Option>
-        ));
-        return (
-          <Select
-            key={'vidSelect'}
-            showSearch={true}
-            placeholder={'input and select a rsid'}
-            filterOption={false}
-            onFocus={async () => {
-              const remoteKeywords = await getRemoteVariant({
-                pageSize: 100,
-                pageIndex: 1,
-                vid: undefined,
-                vtype: keywords.vtype,
-                pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined,
-              });
-              if (remoteKeywords) {
-                const nameList = new Set();
-                remoteKeywords.data.forEach(function (v) {
-                  if (v) {
-                    nameList.add(v.vid);
-                  }
-                });
-                setVidlist(nameList);
-              }
-            }}
-            onSearch={async (value: string) => {
-              const remoteKeywords = await getRemoteVariantLike({
-                pageSize: 100,
-                pageIndex: 1,
-                vid: value,
-                vtype: keywords.vtype,
-                pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined
-              });
-              if (remoteKeywords) {
-                const nameList = new Set();
-                remoteKeywords.data.forEach(function (v) {
-                  if (v) {
-                    nameList.add(v.vid);
-                  }
-                });
-                setVidlist(nameList);
-              }
-            }}
-            onChange={(value) => {
-              setKeywords({ ...keywords, vid: value });
-              // console.log(value)
-            }}
-          >
-            {options}
-          </Select>
-        );
-      },
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Locus</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Location</strong>,
       key: 'loc',
       dataIndex: 'loc',
       ellipsis: true,
@@ -591,7 +469,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Chr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Chromosome</strong>,
       key: 'vchr',
       dataIndex: 'vchr',
       ellipsis: true,
@@ -661,70 +539,9 @@ export default function Page(props: any) {
       search: true,
       sorter: true,
       width:100,
-      renderFormItem: () => {
-        const options = poplist.map((item) => (
-          <Select.Option key={item} value={item} type={item}>
-            {item}
-          </Select.Option>
-        ));
-        return (
-          <Select
-            key={'popSelect'}
-            showSearch={true}
-            placeholder={'input and select a ancestry'}
-            filterOption={false}
-            onFocus={async () => {
-              const remoteKeywords = await getRemoteVariant({
-                pageSize: 100,
-                pageIndex: 1,
-                vid: keywords.vid,
-                vtype: keywords.vtype,
-                pop: undefined,
-                sort_field:undefined,
-                sort_direction:undefined,
-              });
-              if (remoteKeywords) {
-                const nameList = new Set();
-                remoteKeywords.data.forEach(function (v) {
-                  if (v) {
-                    nameList.add(v.pop);
-                  }
-                });
-                setPoplist(nameList);
-              }
-            }}
-            onSearch={async (value: string) => {
-              const remoteKeywords = await getRemoteVariantLike({
-                pageSize: 100,
-                pageIndex: 1,
-                vid: keywords.vid,
-                vtype: keywords.vtype,
-                pop: value,
-                sort_field:undefined,
-                sort_direction:undefined
-              });
-              if (remoteKeywords) {
-                const nameList = new Set();
-                remoteKeywords.data.forEach(function (v) {
-                  if (v) {
-                    nameList.add(v.pop);
-                  }
-                });
-                setPoplist(nameList);
-              }
-            }}
-            onChange={(value) => {
-              setKeywords({ ...keywords, pop: value });
-              // console.log(value)
-            }}
-          >
-            {options}
-          </Select>
-        );
-      },
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Mapped Gene</strong>,
       key: 'gene',
       dataIndex: 'gene',
       ellipsis: true,
@@ -733,7 +550,7 @@ export default function Page(props: any) {
       width:100
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Trait</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Reported Trait</strong>,
       key: 'trait',
       dataIndex: 'trait',
       ellipsis: true,
@@ -755,15 +572,6 @@ export default function Page(props: any) {
       title: <strong style={{ fontFamily: 'sans-serif' }}>#Control</strong>,
       key: 'ncontrol',
       dataIndex: 'ncontrol',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>nor</strong>,
-      key: 'nor',
-      dataIndex: 'nor',
       ellipsis: true,
       search: false,
       sorter: true,
@@ -804,77 +612,16 @@ export default function Page(props: any) {
   const columns3 = [
     Table.SELECTION_COLUMN,
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Variant ID</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Variants</strong>,
       key: 'vid',
       dataIndex: 'vid',
       ellipsis: true,
       width: 150,
       search: false,
       sorter: true,
-      renderFormItem: () => {
-        const options = vidlist.map((item) => (
-          <Select.Option key={item} value={item} type={item}>
-            {item}
-          </Select.Option>
-        ));
-        return (
-          <Select
-            key={'vidSelect'}
-            showSearch={true}
-            placeholder={'input and select a rsid'}
-            filterOption={false}
-            onFocus={async () => {
-              const remoteKeywords = await getRemoteVariant({
-                pageSize: 100,
-                pageIndex: 1,
-                vid: undefined,
-                vtype: keywords.vtype,
-                pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined,
-              });
-              if (remoteKeywords) {
-                const nameList = new Set();
-                remoteKeywords.data.forEach(function (v) {
-                  if (v) {
-                    nameList.add(v.vid);
-                  }
-                });
-                setVidlist(nameList);
-              }
-            }}
-            onSearch={async (value: string) => {
-              const remoteKeywords = await getRemoteVariantLike({
-                pageSize: 100,
-                pageIndex: 1,
-                vid: value,
-                vtype: keywords.vtype,
-                pop: keywords.pop,
-                sort_field:undefined,
-                sort_direction:undefined
-              });
-              if (remoteKeywords) {
-                const nameList = new Set();
-                remoteKeywords.data.forEach(function (v) {
-                  if (v) {
-                    nameList.add(v.vid);
-                  }
-                });
-                setVidlist(nameList);
-              }
-            }}
-            onChange={(value) => {
-              setKeywords({ ...keywords, vid: value });
-              // console.log(value)
-            }}
-          >
-            {options}
-          </Select>
-        );
-      },
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Chr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Chromosome</strong>,
       key: 'vchr',
       dataIndex: 'vchr',
       ellipsis: true,
@@ -892,7 +639,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>gene</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
       key: 'gene',
       dataIndex: 'gene',
       ellipsis: true,
@@ -901,163 +648,27 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>abc</strong>,
-      key: 'abc',
-      dataIndex: 'abc',
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Target Gene</strong>,
+      key: 'target_gene',
+      dataIndex: 'target_gene',
       ellipsis: true,
       search: false,
       sorter: true,
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>cell</strong>,
-      key: 'cell',
-      dataIndex: 'cell',
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Cell Type</strong>,
+      key: 'celltype',
+      dataIndex: 'celltype',
       ellipsis: true,
       search: false,
       sorter: true,
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>gacc</strong>,
-      key: 'gacc',
-      dataIndex: 'gacc',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>cacc</strong>,
-      key: 'cacc',
-      dataIndex: 'cacc',
-      ellipsis: true,
-      search: true,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>gpchi</strong>,
-      key: 'gpchi',
-      dataIndex: 'gpchi',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>cpchi</strong>,
-      key: 'cpchi',
-      dataIndex: 'cpchi',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:150,
-    },
-
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>gca</strong>,
-      key: 'gca',
-      dataIndex: 'gca',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>cca</strong>,
-      key: 'cca',
-      dataIndex: 'cca',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>gha</strong>,
-      key: 'gha',
-      dataIndex: 'gha',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>cha</strong>,
-      key: 'cha',
-      dataIndex: 'cha',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>geq</strong>,
-      key: 'geq',
-      dataIndex: 'geq',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>ceq</strong>,
-      key: 'ceq',
-      dataIndex: 'ceq',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>gro</strong>,
-      key: 'gro',
-      dataIndex: 'gro',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>cro</strong>,
-      key: 'cro',
-      dataIndex: 'cro',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>gsq</strong>,
-      key: 'gsq',
-      dataIndex: 'gsq',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>csq</strong>,
-      key: 'csq',
-      dataIndex: 'csq',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>gpq</strong>,
-      key: 'gpq',
-      dataIndex: 'gpq',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width:100,
-    },
-    {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>cpq</strong>,
-      key: 'cpq',
-      dataIndex: 'cpq',
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Method</strong>,
+      key: 'method',
+      dataIndex: 'method',
       ellipsis: true,
       search: false,
       sorter: true,
@@ -1077,7 +688,7 @@ export default function Page(props: any) {
       sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Chr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Chromosome</strong>,
       key: 'chr',
       dataIndex: 'chr',
       ellipsis: true,
@@ -1095,7 +706,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>ref</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Ref</strong>,
       key: 'ref',
       dataIndex: 'ref',
       ellipsis: true,
@@ -1104,7 +715,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>alt</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Alt</strong>,
       key: 'alt',
       dataIndex: 'alt',
       ellipsis: true,
@@ -1113,7 +724,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>strand</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Strand</strong>,
       key: 'strand',
       dataIndex: 'strand',
       ellipsis: true,
@@ -1122,7 +733,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>hap</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Haplotype</strong>,
       key: 'hap',
       dataIndex: 'hap',
       ellipsis: true,
@@ -1131,7 +742,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>log2fc_ref</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>log2FC_ref</strong>,
       key: 'log2fc_ref',
       dataIndex: 'log2fc_ref',
       ellipsis: true,
@@ -1149,7 +760,7 @@ export default function Page(props: any) {
       width:100
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>padj_ref</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>p-adj_ref</strong>,
       key: 'padj_ref',
       dataIndex: 'padj_ref',
       ellipsis: true,
@@ -1159,7 +770,7 @@ export default function Page(props: any) {
     },
 
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>log2fc_alt</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>log2FC alt</strong>,
       key: 'log2fc_alt',
       dataIndex: 'log2fc_alt',
       ellipsis: true,
@@ -1168,7 +779,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>p_alt</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>p alt</strong>,
       key: 'p_alt',
       dataIndex: 'p_alt',
       ellipsis: true,
@@ -1177,7 +788,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>padj_alt</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>p-adj alt</strong>,
       key: 'padj_alt',
       dataIndex: 'padj_alt',
       ellipsis: true,
@@ -1186,7 +797,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>celltype</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Cell Type</strong>,
       key: 'celltype',
       dataIndex: 'celltype',
       ellipsis: true,
@@ -1195,7 +806,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>year</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Year</strong>,
       key: 'year',
       dataIndex: 'year',
       ellipsis: true,
@@ -1204,7 +815,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>pmid</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>PMID</strong>,
       key: 'pmid',
       dataIndex: 'pmid',
       ellipsis: true,
@@ -1213,11 +824,10 @@ export default function Page(props: any) {
       width:100,
     },
   ];
-
   const columns5 = [
     Table.SELECTION_COLUMN,
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>technology</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Technology</strong>,
       key: 'technology',
       dataIndex: 'technology',
       ellipsis: true,
@@ -1226,7 +836,7 @@ export default function Page(props: any) {
       sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>grna</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>gRNA Hit</strong>,
       key: 'grna',
       dataIndex: 'grna',
       ellipsis: true,
@@ -1235,7 +845,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>gene</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Target Gene</strong>,
       key: 'gene',
       dataIndex: 'gene',
       ellipsis: true,
@@ -1244,7 +854,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>chr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Target Chromosome</strong>,
       key: 'chr',
       dataIndex: 'chr',
       ellipsis: true,
@@ -1253,7 +863,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>start</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Target Site Start</strong>,
       key: 'start',
       dataIndex: 'start',
       ellipsis: true,
@@ -1262,7 +872,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>end</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Target Site End</strong>,
       key: 'end',
       dataIndex: 'end',
       ellipsis: true,
@@ -1271,7 +881,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>diff</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Diff Active Gene</strong>,
       key: 'diff',
       dataIndex: 'diff',
       ellipsis: true,
@@ -1280,7 +890,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>log2fc</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>log2FC</strong>,
       key: 'log2fc',
       dataIndex: 'log2fc',
       ellipsis: true,
@@ -1298,7 +908,7 @@ export default function Page(props: any) {
       width:100
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>fdr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>FDR</strong>,
       key: 'fdr',
       dataIndex: 'fdr',
       ellipsis: true,
@@ -1308,7 +918,7 @@ export default function Page(props: any) {
     },
 
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>celltype</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Cell Type</strong>,
       key: 'celltype',
       dataIndex: 'celltype',
       ellipsis: true,
@@ -1317,7 +927,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>year</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Year</strong>,
       key: 'year',
       dataIndex: 'year',
       ellipsis: true,
@@ -1326,7 +936,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>pmid</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>PMID</strong>,
       key: 'pmid',
       dataIndex: 'pmid',
       ellipsis: true,
@@ -1337,7 +947,7 @@ export default function Page(props: any) {
   ];
   const columns6 = [
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Variant ID</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Variants</strong>,
       key: 'vid',
       dataIndex: 'vid',
       ellipsis: true,
@@ -1346,7 +956,7 @@ export default function Page(props: any) {
       sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>loc</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Location</strong>,
       key: 'loc',
       dataIndex: 'loc',
       ellipsis: true,
@@ -1355,7 +965,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Chr</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Chromosome</strong>,
       key: 'vchr',
       dataIndex: 'vchr',
       ellipsis: true,
@@ -1364,7 +974,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>start</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Start</strong>,
       key: 'vs',
       dataIndex: 'vs',
       ellipsis: true,
@@ -1373,7 +983,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>end</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>End</strong>,
       key: 've',
       dataIndex: 've',
       ellipsis: true,
@@ -1382,7 +992,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Mapped Gene</strong>,
       key: 'gene',
       dataIndex: 'gene',
       ellipsis: true,
@@ -1391,7 +1001,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>celltype</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Cell Type</strong>,
       key: 'celltype',
       dataIndex: 'celltype',
       ellipsis: true,
@@ -1400,7 +1010,7 @@ export default function Page(props: any) {
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>species</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Species</strong>,
       key: 'species',
       dataIndex: 'species',
       ellipsis: true,
@@ -1409,7 +1019,7 @@ export default function Page(props: any) {
       width:100
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>trait</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Reported Trait</strong>,
       key: 'trait',
       dataIndex: 'trait',
       ellipsis: true,
@@ -1418,7 +1028,7 @@ export default function Page(props: any) {
       width:150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>year</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Year</strong>,
       key: 'nyear',
       dataIndex: 'nyear',
       ellipsis: true,
@@ -1458,12 +1068,12 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider />
-      <Row>
+      <Row style={{display: variants.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>SNP Annotation</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: variants.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns}
@@ -1658,12 +1268,12 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider/>
-      <Row>
+      <Row style={{display: variants2.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>Curation variant</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: variants2.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns2}
@@ -1870,12 +1480,12 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider/>
-      <Row>
+      <Row style={{display: variants3.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>Target Gene</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: variants3.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns3}
@@ -2074,12 +1684,12 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider/>
-      <Row>
+      <Row style={{display: variants4.length > 0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>MPRA</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: variants4.length > 0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns4}
@@ -2278,12 +1888,12 @@ export default function Page(props: any) {
         </Col>
       </Row>
       <Divider/>
-      <Row>
+      <Row style={{display: variants5.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>CRISPR</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: variants5.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns5}
@@ -2481,12 +2091,12 @@ export default function Page(props: any) {
           />
         </Col>
       </Row>
-      <Row>
+      <Row style={{display: variants6.length>0 ? 'flex' : 'none' }}>
         <Col md={4}>
           <Title level={2}>Curation</Title>
         </Col>
       </Row>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{display: variants6.length>0 ? 'flex' : 'none' }}>
         <Col md={24}>
           <ProTable
             columns={columns6}

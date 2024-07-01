@@ -96,7 +96,7 @@ export const getRemoteGeneewas = async ({
   sort_field: string | undefined;
   sort_direction: string | undefined;
 }) => {
-  return extendRequest(API_PREFIX + '/genetwas', {
+  return extendRequest(API_PREFIX + '/geneewas', {
     method: 'get',
     params: {
       pageSize: pageSize,

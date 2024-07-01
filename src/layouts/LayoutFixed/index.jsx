@@ -226,7 +226,7 @@ export default function (props) {
       label: (
         <a
           onClick={() => {
-            history.push('/resource');
+            history.push('/download');
           }}
         >
           <strong style={{ color: '#252746' }}>Resource</strong>
