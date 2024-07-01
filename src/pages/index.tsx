@@ -98,7 +98,7 @@ export default function IndexPage() {
     <div>
       <Row justify="center" style={{ background: '#BED7DC' }}>
         <Title level={2} className={styles.introduction}>
-          SZGR 3.0: a one-stop shop of schizophrenia candidate genes
+          SZGR: <Text underline={true}>S</Text>chi<Text underline={true}>Z</Text>ophrenia <Text underline={true}>G</Text>ene <Text underline={true}>R</Text>esource
         </Title>
       </Row>
       <Divider />
@@ -136,19 +136,19 @@ export default function IndexPage() {
             e.g.{' '}
             <Space>
               <a
-                href={URL_PREFIX + '/explorevariant/rs9890128'}
+                href={URL_PREFIX + '/explorevariant/rs555719522'}
                 target={'_blank'}
               >
-                rs9890128,
+                rs555719522,
               </a>
               <a
-                href={URL_PREFIX + '/variant/chr7:620000-720000'}
+                href={URL_PREFIX + '/variant/chr6:29760111-29760510'}
                 target={'_blank'}
               >
-                chr7:620000-720000,
+                chr6:29760111-29760510,
               </a>
-              <a href={URL_PREFIX + '/exploregene/NRG1'} target={'_blank'}>
-                NRG1
+              <a href={URL_PREFIX + '/exploregene/CACNA1C'} target={'_blank'}>
+                CACNA1C
               </a>
             </Space>
           </strong>
@@ -228,7 +228,7 @@ export default function IndexPage() {
               <Title
                 level={2}
                 style={{
-                  width: '180px',
+                  width: '160px',
                   height: '50px',
                   border: '1px solid',
                   textAlign: 'center',
@@ -236,7 +236,7 @@ export default function IndexPage() {
                   backgroundColor: '#F2DCEB',
                 }}
               >
-                Analyzation
+                Analysis
               </Title>
             </Space>
           </Row>
@@ -270,7 +270,7 @@ export default function IndexPage() {
                     Genes
                   </strong>
                 }
-                value={23286}
+                value={21438}
                 valueStyle={{ color: '#3f8600' }}
                 prefix={<Icon2 />}
               />
@@ -285,7 +285,7 @@ export default function IndexPage() {
                     Publications
                   </strong>
                 }
-                value={558}
+                value={654}
                 valueStyle={{ color: '#3f8600' }}
                 prefix={<Icon3 />}
               />
@@ -366,7 +366,7 @@ export default function IndexPage() {
               />
             </Card.Grid>
           </Card>
-          <Row>
+          <Row justify={'center'}>
             <Col>
               <List
                 size="small"

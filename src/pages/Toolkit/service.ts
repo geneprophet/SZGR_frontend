@@ -26,28 +26,28 @@ export const extendRequest = extend({ errorHandler });
 export const getRemoteCoexpression = async ({
   pageSize,
   pageIndex,
-  vid,
-  vtype,
-  pop,
+  tissue,
+  celltype,
+  gene,
   sort_field,
   sort_direction,
 }: {
   pageSize: number | undefined;
   pageIndex: number | undefined;
-  vid: string | undefined;
-  vtype: string | undefined;
-  pop: string | undefined;
+  tissue: string | undefined;
+  celltype: string | undefined;
+  gene: string | undefined;
   sort_field: string | undefined;
   sort_direction: string | undefined;
 }) => {
-  return extendRequest(API_PREFIX + '/variantcuration', {
+  return extendRequest(API_PREFIX + '/coexpression', {
     method: 'get',
     params: {
       pageSize: pageSize,
       pageIndex: pageIndex,
-      vid: vid,
-      vtype: vtype,
-      pop: pop,
+      tissue: tissue,
+      celltype: celltype,
+      gene: gene,
       sort_field: sort_field,
       sort_direction: sort_direction,
     },
@@ -59,31 +59,32 @@ export const getRemoteCoexpression = async ({
       return false;
     });
 };
+
 export const getRemoteCoexpressionLike = async ({
-  pageSize,
-  pageIndex,
-  vid,
-  vtype,
-  pop,
-  sort_field,
-  sort_direction,
-}: {
+                                              pageSize,
+                                              pageIndex,
+                                              tissue,
+                                              celltype,
+                                              gene,
+                                              sort_field,
+                                              sort_direction,
+                                            }: {
   pageSize: number | undefined;
   pageIndex: number | undefined;
-  vid: string | undefined;
-  vtype: string | undefined;
-  pop: string | undefined;
+  tissue: string | undefined;
+  celltype: string | undefined;
+  gene: string | undefined;
   sort_field: string | undefined;
   sort_direction: string | undefined;
 }) => {
-  return extendRequest(API_PREFIX + '/variantcurationlike', {
+  return extendRequest(API_PREFIX + '/coexpressionlike', {
     method: 'get',
     params: {
       pageSize: pageSize,
       pageIndex: pageIndex,
-      vid: vid,
-      vtype: vtype,
-      pop: pop,
+      tissue: tissue,
+      celltype: celltype,
+      gene: gene,
       sort_field: sort_field,
       sort_direction: sort_direction,
     },

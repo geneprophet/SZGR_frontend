@@ -529,15 +529,6 @@ export default function Page(props: any) {
       width: 100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>nor</strong>,
-      key: 'nor',
-      dataIndex: 'nor',
-      ellipsis: true,
-      search: false,
-      sorter: true,
-      width: 100,
-    },
-    {
       title: <strong style={{ fontFamily: 'sans-serif' }}>PMID</strong>,
       key: 'pmid',
       dataIndex: 'pmid',

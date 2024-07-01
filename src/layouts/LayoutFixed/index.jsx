@@ -76,7 +76,7 @@ export default function (props) {
       icon: <HomeIcon />,
     },
     {
-      label: (<a onClick={() => {history.push('/variant/all');}}><strong style={{ color: '#252746' }}>Variant</strong></a>),
+      label: (<a onClick={() => {history.push('/variant/CV');}}><strong style={{ color: '#252746' }}>Variant</strong></a>),
       key: '2',
       icon: <LociIcon />,
       children: [
