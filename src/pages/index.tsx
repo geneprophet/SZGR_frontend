@@ -136,16 +136,19 @@ export default function IndexPage() {
             e.g.{' '}
             <Space>
               <a
-                href={URL_PREFIX + '/explorevariant/rs555719522'}
+                href={URL_PREFIX + '/explorevariant/rs594591'}
                 target={'_blank'}
               >
-                rs555719522,
+                rs594591,
               </a>
               <a
                 href={URL_PREFIX + '/variant/chr6:29760111-29760510'}
                 target={'_blank'}
               >
                 chr6:29760111-29760510,
+              </a>
+              <a href={URL_PREFIX + '/exploregene/SOX2-OT'} target={'_blank'}>
+                SOX2-OT,
               </a>
               <a href={URL_PREFIX + '/exploregene/CACNA1C'} target={'_blank'}>
                 CACNA1C

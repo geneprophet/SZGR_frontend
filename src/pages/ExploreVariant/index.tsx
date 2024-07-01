@@ -622,26 +622,44 @@ export default function Page(props: any) {
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Chromosome</strong>,
-      key: 'vchr',
-      dataIndex: 'vchr',
+      key: 'chr',
+      dataIndex: 'chr',
       ellipsis: true,
       sorter: true,
       search: false,
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Position</strong>,
-      key: 'vpos',
-      dataIndex: 'vpos',
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Location</strong>,
+      key: 'loc',
+      dataIndex: 'loc',
       ellipsis: true,
       search: false,
       sorter: true,
       width:100,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
-      key: 'gene',
-      dataIndex: 'gene',
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Start</strong>,
+      key: 'start',
+      dataIndex: 'start',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:150,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>End</strong>,
+      key: 'end',
+      dataIndex: 'end',
+      ellipsis: true,
+      search: false,
+      sorter: true,
+      width:150,
+    },
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Proximal Gene</strong>,
+      key: 'pro_gene',
+      dataIndex: 'pro_gene',
       ellipsis: true,
       search: false,
       sorter: true,
@@ -675,7 +693,6 @@ export default function Page(props: any) {
       width:100,
     }
   ];
-
   const columns4 = [
     Table.SELECTION_COLUMN,
     {

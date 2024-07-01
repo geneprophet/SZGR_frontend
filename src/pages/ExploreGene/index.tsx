@@ -975,12 +975,12 @@ export default function Page(props: any) {
       </Row>
       <Row>
         <Tabs
-          defaultActiveKey="fetal_forebrain"
+          defaultActiveKey="cerebellum"
           onChange={onChange}
           items={[
             {
-              label: `Fetal Forebrain`,
-              key: 'fetal_forebrain',
+              label: `Cerebellum`,
+              key: 'cerebellum',
               children:
                 <Row justify={'center'}>
                   <Col md={2}>
@@ -1004,19 +1004,19 @@ export default function Page(props: any) {
                 </Row>,
             },
             {
-              label: `Cerebellum`,
-              key: 'cerebellum',
+              label: `Fetal Forebrain`,
+              key: 'fetal_forebrain',
               children:
                 <Row justify={'center'}>
                   <Col md={2}>
                     <Title level={3}>Expression:</Title>
                   </Col>
-                    <Col md={11}>
-                      <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } />
-                    </Col>
-                    <Col md={11}>
-                      <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } />
-                    </Col>
+                  <Col md={11}>
+                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } />
+                  </Col>
+                  <Col md={11}>
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } />
+                  </Col>
                   <Col md={2}>
                     <Title level={3}>Trajectory:</Title>
                   </Col>
