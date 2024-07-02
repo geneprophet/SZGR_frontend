@@ -18,8 +18,9 @@ import {
   Button,
   Select,
   Space,
-  Typography, Input
+  Typography, Input, Image
 } from "antd";
+import gsea_demo from '@/assets/gsea_demo.png';
 const {Title,Text} = Typography;
 import { ProColumns, ProTable } from '@ant-design/pro-table';
 import { AnalysisIcon } from '../../components/Icons/index';
@@ -8517,7 +8518,8 @@ export default function Page(props: any) {
   }, []);
   const [userinputtissue, setUserinputtissue] = useState('Cerebral_Cortex');
   const [userinputcelltype, setUserinputcelltype] = useState('Excitatory_Neuron');
-  const [userinputgene, setUserinputgene] = useState('CUL3,RERE,SOX2-OT,MLKL,ALMS1,FLOT1,NIPSNAP1,PPP1R13B,CLCN3,QPCT,ELAC2,MLXIP,DLG4,DGKZ,PCCB,KLC1,CACNA1C,SDCCAG8,TSNARE1');
+  const [userinputgene, setUserinputgene] = useState('ATF6B,LRP4,SPNS1,SCUBE3,MFSD14B,PRKD3,MFSD13A,GBA,SRSF7,RPL29,CPQ,BDNF-AS,YY1AP1,RIN3,CCNH,HMOX2,FEZ2,WIPI1,BTF3,C11orf49,SPCS1,FDPS,RPL6,MTRF1L,HEATR5B,TMEM116,CACNB2,TMEM9B,ZNF76,CUTC,SMIM4,SYT11,MADD,RANGAP1,WDR82,CLPTM1,SYNGR1,NR1H3,SGF29,C1QTNF4,INA,KBTBD4,GNL3,ALDOA,ACYP2,TMEM160,GTF3C1,CDC123,QPCT,BPTF,SSR2,ATP9A,NFE2L1,TEX264,TMEM67,C6orf1,EIF4A2,DNAJC27-AS1,RPL27A,HEXB,CLK2,CALM3,LMNA,NDUFAF7,TUFM,BAP1,CHGA,HACD1,ITSN2,RUSC1,MEF2D');
+  const [userinputgene2, setUserinputgene2] = useState('AR,ARID1A,ARID1B,ARID2,ARID4B,ASF1A,ASH2L,ATXN1L,BCL11A,BCL7A,BCL7C,BCL9,BCOR,BMPER,BPTF,BRD2,BRD3,BRMS1L,C19orf71,C7orf61,CBX3,CBX5,CCDC144NL,CDK8,CENPA,CHAF1A,CHD7,CIC,CREBBP,CSNK2A1,DLGAP1-AS2,DPF1,DPT,E2F6,EHMT1,EHMT2,ELF1,ELF2,ELF4,ELK3,EN1,EP300,EP400,ERG,ETS1,EZH2,FAT2,FEV,FHL2,FOXI1,FOXK1,FOXK2,FOXP1,FSTL5,GATA2,GATA3,GATAD1,GATAD2A,GATAD2B,GCM1,GSE1,H2AZ1,H2BC21,H2BC8,H3-4,H3C1,H4C1,HDAC1,HDAC2,HDAC3,HERC2P3,HHAT,HIVEP1,HMG20A,HMGXB4,HNF1B,HNF4A,IQCJ-SCHIP1,IRF4,JUN,KAT14,KAT2B,KAT5,KCNQ1OT1,KDM1A,KDM2B,KDM6A,KLF3,KLF5,KLF8,KMT2A,KMT2C,KMT2D,KRTAP9-9,L3MBTL2,LDB1,LHX2,LHX3,LHX4,LIN37,LIN9,MAP6D1,MBD2,MBD3,MBIP,MCRS1,MED4,MGA,MTA1,MTA2,MTA3,MYB,MYOD1,NCOA3,NCOR1,NCOR2,NFIA,NFIB,NFIC,NFIX,NKAPP1,NKX6-2,NR2C1,PARP1,PAX2,PAX6,PAX7,PAX8,PAX9,PBRM1,PCGF1,PHF1,PHF12,POGZ,POLR1G,RB1,RBBP4,RBBP5,RBBP7,RBPJ,RCOR1,RERE,RNU6-6P,RNU6-8,RPL23AP42,SAP130,SAP30,SATB2,SIN3A,SIN3B,SLC24A2,SMARCA2,SMARCA4,SMARCB1,SMARCC1,SMARCC2,SMARCD1,SMARCD2,SMARCD3,SMARCE1,SMG7,SOX10,SOX17,SOX21-AS1,SOX5,SOX6,SOX9,SP7,SS18L1,SSBP3,ST18,SUDS3,SUZ12,TADA2A,TAF6,TBL1X,TBR1,TBXT,TEAD1,TERF2IP,TFIP11,TLE1,TLE5,TLX1,TLX3,TMEM163,TP53BP1,TRPS1,TRRAP,UBE2I,WIZ,YY1,ZNF330,ZNF608,ZNF609,ZNF644,ZNF676,ZZZ3')
   const [tissuelist, setTissuelist] = useState([]);
   const [celltypelist, setCelltypelist] = useState([]);
 
@@ -8732,7 +8734,7 @@ export default function Page(props: any) {
                 placeholder="input a collection of gene symbols separated by commas"
                 allowClear={true}
                 value={userinputgene}
-                maxLength={100}
+                maxLength={1000}
                 showCount={true}
                 autoSize={{minRows:2,maxRows: 6 }}
                 onChange={(e) => {
@@ -8770,6 +8772,64 @@ export default function Page(props: any) {
             Results:
           </Title>
           <Network network={network} />
+        </Col>
+      </Row>
+      <Divider />
+      <Title level={2}>
+        Cell-Type Enrichment Analysis
+      </Title>
+      <Row justify={'center'}>
+        <Col md={8}>
+          <Row>
+            <Title level={3}>
+              1. Input Gene Set
+            </Title>
+          </Row>
+          <Row>
+            <TextArea
+              placeholder="input a collection of gene symbols separated by commas"
+              allowClear={true}
+              style={{width:'90%'}}
+              value={userinputgene2}
+              maxLength={1000}
+              showCount={true}
+              autoSize={{minRows:2, maxRows: 10 }}
+              onChange={(e) => {
+                if (e.target.value) {
+                  setUserinputgene(e.target.value.toString());
+                  // console.log(e.target.value.toString().toUpperCase())
+                } else {
+                  setUserinputgene('');
+                }
+              }}
+            />
+            <Text
+              style={{ color: '#4D96FF' }}
+              onClick={() => {
+                setUserinputgene2('AR,ARID1A,ARID1B,ARID2,ARID4B,ASF1A,ASH2L,ATXN1L,BCL11A,BCL7A,BCL7C,BCL9,BCOR,BMPER,BPTF,BRD2,BRD3,BRMS1L,C19orf71,C7orf61,CBX3,CBX5,CCDC144NL,CDK8,CENPA,CHAF1A,CHD7,CIC,CREBBP,CSNK2A1,DLGAP1-AS2,DPF1,DPT,E2F6,EHMT1,EHMT2,ELF1,ELF2,ELF4,ELK3,EN1,EP300,EP400,ERG,ETS1,EZH2,FAT2,FEV,FHL2,FOXI1,FOXK1,FOXK2,FOXP1,FSTL5,GATA2,GATA3,GATAD1,GATAD2A,GATAD2B,GCM1,GSE1,H2AZ1,H2BC21,H2BC8,H3-4,H3C1,H4C1,HDAC1,HDAC2,HDAC3,HERC2P3,HHAT,HIVEP1,HMG20A,HMGXB4,HNF1B,HNF4A,IQCJ-SCHIP1,IRF4,JUN,KAT14,KAT2B,KAT5,KCNQ1OT1,KDM1A,KDM2B,KDM6A,KLF3,KLF5,KLF8,KMT2A,KMT2C,KMT2D,KRTAP9-9,L3MBTL2,LDB1,LHX2,LHX3,LHX4,LIN37,LIN9,MAP6D1,MBD2,MBD3,MBIP,MCRS1,MED4,MGA,MTA1,MTA2,MTA3,MYB,MYOD1,NCOA3,NCOR1,NCOR2,NFIA,NFIB,NFIC,NFIX,NKAPP1,NKX6-2,NR2C1,PARP1,PAX2,PAX6,PAX7,PAX8,PAX9,PBRM1,PCGF1,PHF1,PHF12,POGZ,POLR1G,RB1,RBBP4,RBBP5,RBBP7,RBPJ,RCOR1,RERE,RNU6-6P,RNU6-8,RPL23AP42,SAP130,SAP30,SATB2,SIN3A,SIN3B,SLC24A2,SMARCA2,SMARCA4,SMARCB1,SMARCC1,SMARCC2,SMARCD1,SMARCD2,SMARCD3,SMARCE1,SMG7,SOX10,SOX17,SOX21-AS1,SOX5,SOX6,SOX9,SP7,SS18L1,SSBP3,ST18,SUDS3,SUZ12,TADA2A,TAF6,TBL1X,TBR1,TBXT,TEAD1,TERF2IP,TFIP11,TLE1,TLE5,TLX1,TLX3,TMEM163,TP53BP1,TRPS1,TRRAP,UBE2I,WIZ,YY1,ZNF330,ZNF608,ZNF609,ZNF644,ZNF676,ZZZ3');
+              }}
+            >
+              e.g. AR,ARID1A,ARID1B,ARID2,ARID4B,ASF1A,ASH2L,ATXN1L,BCL11A,BCL7A,BCL7C,BCL9,BCOR,BMPER,BPTF,BRD2,BRD3,BRMS1L,C19orf71,C7orf61,CBX3,CBX5,CCDC144NL,CDK8,CENPA,CHAF1A,CHD7,CIC,CREBBP,CSNK2A1,DLGAP1-AS2,DPF1,DPT,E2F6,EHMT1,EHMT2,ELF1,ELF2,ELF4,ELK3,EN1,EP300,EP400,ERG,ETS1,EZH2,FAT2,FEV,FHL2,FOXI1,FOXK1,FOXK2,FOXP1,FSTL5,GATA2,GATA3,GATAD1,GATAD2A,GATAD2B,GCM1,GSE1,H2AZ1,H2BC21,H2BC8,H3-4,H3C1,H4C1,HDAC1,HDAC2,HDAC3,HERC2P3,HHAT,HIVEP1,HMG20A,HMGXB4,HNF1B,HNF4A,IQCJ-SCHIP1,IRF4,JUN,KAT14,KAT2B,KAT5,KCNQ1OT1,KDM1A,KDM2B,KDM6A,KLF3,KLF5,KLF8,KMT2A,KMT2C,KMT2D,KRTAP9-9,L3MBTL2,LDB1,LHX2,LHX3,LHX4,LIN37,LIN9,MAP6D1,MBD2,MBD3,MBIP,MCRS1,MED4,MGA,MTA1,MTA2,MTA3,MYB,MYOD1,NCOA3,NCOR1,NCOR2,NFIA,NFIB,NFIC,NFIX,NKAPP1,NKX6-2,NR2C1,PARP1,PAX2,PAX6,PAX7,PAX8,PAX9,PBRM1,PCGF1,PHF1,PHF12,POGZ,POLR1G,RB1,RBBP4,RBBP5,RBBP7,RBPJ,RCOR1,RERE,RNU6-6P,RNU6-8,RPL23AP42,SAP130,SAP30,SATB2,SIN3A,SIN3B,SLC24A2,SMARCA2,SMARCA4,SMARCB1,SMARCC1,SMARCC2,SMARCD1,SMARCD2,SMARCD3,SMARCE1,SMG7,SOX10,SOX17,SOX21-AS1,SOX5,SOX6,SOX9,SP7,SS18L1,SSBP3,ST18,SUDS3,SUZ12,TADA2A,TAF6,TBL1X,TBR1,TBXT,TEAD1,TERF2IP,TFIP11,TLE1,TLE5,TLX1,TLX3,TMEM163,TP53BP1,TRPS1,TRRAP,UBE2I,WIZ,YY1,ZNF330,ZNF608,ZNF609,ZNF644,ZNF676,ZZZ3
+            </Text>
+          </Row>
+          <Row>
+            <Col>
+              <Title level={3}>
+                2.
+                <Button type="primary" onClick={onSubmit}>
+                  Submit Job
+                </Button>
+              </Title>
+            </Col>
+          </Row>
+        </Col>
+        <Col md={14}>
+          <Row justify={'center'}>
+            <Title level={3}>
+              Results:
+            </Title>
+            <Image src={gsea_demo} preview={false} width={'80%'}></Image>
+          </Row>
         </Col>
       </Row>
     </div>

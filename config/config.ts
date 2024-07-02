@@ -29,10 +29,10 @@ export default defineConfig({
   theme: {
     '@primary-color': '#667BC6',
   },
-  // favicon: 'https://ngdc.cncb.ac.cn/pharmgwas/img/favicon.ico',
+  favicon: 'https://ngdc.cncb.ac.cn/szgr/img/favicon.ico',
   headScripts: [
     {
-      content: `var _hmt = _hmt || []; (function() {var hm = document.createElement("script");hm.src = "https://hm.baidu.com/hm.js?4d1079128b03d56379e3b9bd954af2cc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();`,
+      content: `var _hmt = _hmt || []; (function() {var hm = document.createElement("script");hm.src = "https://hm.baidu.com/hm.js?46f60d5cb5c37895b5355927ead9f773";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();`,
     },
   ],
   metas: [

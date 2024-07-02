@@ -25,7 +25,7 @@ import { ProTable } from '@ant-design/pro-table';
 import { Parser } from 'json2csv';
 import { getRemoteCoexpression } from "@/pages/Toolkit/service";
 const { Title, Paragraph, Text, Link } = Typography;
-
+import notapplied from '@/assets/notapplied.jpg';
 export default function Page(props: any) {
   const [name, setName] = useState(undefined);
   useEffect(() => {
@@ -987,19 +987,19 @@ export default function Page(props: any) {
                     <Title level={3}>Expression:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } fallback={notapplied}/>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } fallback={notapplied} />
                   </Col>
                   <Col md={2}>
                     <Title level={3}>Trajectory:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } fallback={notapplied}/>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } fallback={notapplied} />
                   </Col>
                 </Row>,
             },
@@ -1037,19 +1037,19 @@ export default function Page(props: any) {
                     <Title level={3}>Expression:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } fallback={notapplied} />
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } fallback={notapplied} />
                   </Col>
                   <Col md={2}>
                     <Title level={3}>Trajectory:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } fallback={notapplied}/>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } fallback={notapplied}/>
                   </Col>
                 </Row>,
             },
@@ -1062,19 +1062,19 @@ export default function Page(props: any) {
                     <Title level={3}>Expression:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } fallback={notapplied}/>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } fallback={notapplied} />
                   </Col>
                   <Col md={2}>
                     <Title level={3}>Trajectory:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } fallback={notapplied} />
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } fallback={notapplied} />
                   </Col>
                 </Row>,
             },
@@ -1087,19 +1087,19 @@ export default function Page(props: any) {
                     <Title level={3}>Expression:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } fallback={notapplied}/>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } fallback={notapplied} />
                   </Col>
                   <Col md={2}>
                     <Title level={3}>Trajectory:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } fallback={notapplied}/>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } fallback={notapplied} />
                   </Col>
                 </Row>,
             },
@@ -1112,19 +1112,19 @@ export default function Page(props: any) {
                     <Title level={3}>Expression:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } fallback={notapplied} />
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } fallback={notapplied} />
                   </Col>
                   <Col md={2}>
                     <Title level={3}>Trajectory:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } fallback={notapplied}/>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } fallback={notapplied}/>
                   </Col>
                 </Row>,
             },
@@ -1137,19 +1137,19 @@ export default function Page(props: any) {
                     <Title level={3}>Expression:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image width={'90%'} preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_celltypes.png' } fallback={notapplied} />
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/draw_graph_fa_'+ name +'.png' } fallback={notapplied} />
                   </Col>
                   <Col md={2}>
                     <Title level={3}>Trajectory:</Title>
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_celltypes.png' } fallback={notapplied} />
                   </Col>
                   <Col md={11}>
-                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } />
+                    <Image width={'90%'}  preview={false} src={IMG_PREFIX + 'gene_function/' + key +'/paga_' + name +'.png' } fallback={notapplied}/>
                   </Col>
                 </Row>,
             },

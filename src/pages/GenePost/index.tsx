@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from './index.less';
-import { getRemoteGeneeqtl, getRemoteGeneeqtlLike } from "@/pages/GenePost/service";
+import {
+  getRemoteGeneColoc,
+  getRemoteGeneeqtl,
+  getRemoteGeneeqtlLike,
+  getRemoteGeneMeqtl, getRemoteGenePqtl, getRemoteGeneSmr
+} from "@/pages/GenePost/service";
 import { Breadcrumb, Col, Divider, Row, Select, Space, Table, Tabs, Typography } from "antd";
 import {
   AnalysisIcon,DetailIcon
@@ -68,6 +73,14 @@ export default function Page(props: any) {
   const [evidence, setEvidence] = useState('eQTL');
   const columns =[
     Table.SELECTION_COLUMN,
+    {
+      title: <strong style={{ fontFamily: 'sans-serif' }}>QTL</strong>,
+      key: 'qtl',
+      dataIndex: 'qtl',
+      ellipsis: true,
+      search: false,
+      sorter:true,
+    },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Evidence</strong>,
       key: 'evidence',
@@ -256,7 +269,7 @@ export default function Page(props: any) {
         setTotal(res.meta.total);
       });
     }else if(key=="meQTL"){
-      getRemoteGeneeqtl({
+      getRemoteGeneMeqtl({
         pageSize: pagesize,
         pageIndex: pageindex,
         gene: name,
@@ -268,7 +281,7 @@ export default function Page(props: any) {
         setTotal(res.meta.total);
       });
     }else if(key=="pQTL"){
-      getRemoteGeneeqtl({
+      getRemoteGenePqtl({
         pageSize: pagesize,
         pageIndex: pageindex,
         gene: name,
@@ -280,7 +293,7 @@ export default function Page(props: any) {
         setTotal(res.meta.total);
       });
     }else if(key=="coloc"){
-      getRemoteGeneeqtl({
+      getRemoteGeneColoc({
         pageSize: pagesize,
         pageIndex: pageindex,
         gene: name,
@@ -292,7 +305,7 @@ export default function Page(props: any) {
         setTotal(res.meta.total);
       });
     }else if(key=="smr"){
-      getRemoteGeneeqtl({
+      getRemoteGeneSmr({
         pageSize: pagesize,
         pageIndex: pageindex,
         gene: name,
@@ -525,7 +538,7 @@ export default function Page(props: any) {
                   loading={loading}
                   scroll={{ x: 1200 }}
                   rowKey={(record: any) => {
-                    return record.id.toString() + 'table';
+                    return record.id.toString() + 'table2';
                   }}
                   search={{
                     defaultCollapsed: false,
@@ -544,7 +557,7 @@ export default function Page(props: any) {
                   }}
                   onSubmit={() => {
                     setLoading(true);
-                    getRemoteGeneeqtl({
+                    getRemoteGeneMeqtl({
                       pageSize: pagesize,
                       pageIndex: 1,
                       gene: keywords.gene,
@@ -558,7 +571,7 @@ export default function Page(props: any) {
                   }}
                   onReset={()=>{
                     setLoading(true);
-                    getRemoteGeneeqtl({
+                    getRemoteGeneMeqtl({
                       pageSize: 10,
                       pageIndex: 1,
                       gene:undefined,
@@ -579,7 +592,7 @@ export default function Page(props: any) {
                     setKeywords({ ...keywords, sort_field: sorter.field });
                     setKeywords({ ...keywords, sort_direction: sorter.order });
                     setLoading(true);
-                    getRemoteGeneeqtl({
+                    getRemoteGeneMeqtl({
                       pageSize: pagination.pageSize,
                       pageIndex: pagination.current,
                       gene:  keywords.gene,
@@ -708,7 +721,7 @@ export default function Page(props: any) {
                   loading={loading}
                   scroll={{ x: 1200 }}
                   rowKey={(record: any) => {
-                    return record.id.toString() + 'table';
+                    return record.id.toString() + 'table3';
                   }}
                   search={{
                     defaultCollapsed: false,
@@ -727,7 +740,7 @@ export default function Page(props: any) {
                   }}
                   onSubmit={() => {
                     setLoading(true);
-                    getRemoteGeneeqtl({
+                    getRemoteGeneColoc({
                       pageSize: pagesize,
                       pageIndex: 1,
                       gene: keywords.gene,
@@ -741,7 +754,7 @@ export default function Page(props: any) {
                   }}
                   onReset={()=>{
                     setLoading(true);
-                    getRemoteGeneeqtl({
+                    getRemoteGeneColoc({
                       pageSize: 10,
                       pageIndex: 1,
                       gene:undefined,
@@ -762,7 +775,7 @@ export default function Page(props: any) {
                     setKeywords({ ...keywords, sort_field: sorter.field });
                     setKeywords({ ...keywords, sort_direction: sorter.order });
                     setLoading(true);
-                    getRemoteGeneeqtl({
+                    getRemoteGeneColoc({
                       pageSize: pagination.pageSize,
                       pageIndex: pagination.current,
                       gene:  keywords.gene,
@@ -891,7 +904,7 @@ export default function Page(props: any) {
                   loading={loading}
                   scroll={{ x: 1200 }}
                   rowKey={(record: any) => {
-                    return record.id.toString() + 'table';
+                    return record.id.toString() + 'table4';
                   }}
                   search={{
                     defaultCollapsed: false,
@@ -910,7 +923,7 @@ export default function Page(props: any) {
                   }}
                   onSubmit={() => {
                     setLoading(true);
-                    getRemoteGeneeqtl({
+                    getRemoteGeneSmr({
                       pageSize: pagesize,
                       pageIndex: 1,
                       gene: keywords.gene,
@@ -924,7 +937,7 @@ export default function Page(props: any) {
                   }}
                   onReset={()=>{
                     setLoading(true);
-                    getRemoteGeneeqtl({
+                    getRemoteGeneSmr({
                       pageSize: 10,
                       pageIndex: 1,
                       gene:undefined,
@@ -945,7 +958,7 @@ export default function Page(props: any) {
                     setKeywords({ ...keywords, sort_field: sorter.field });
                     setKeywords({ ...keywords, sort_direction: sorter.order });
                     setLoading(true);
-                    getRemoteGeneeqtl({
+                    getRemoteGeneSmr({
                       pageSize: pagination.pageSize,
                       pageIndex: pagination.current,
                       gene:  keywords.gene,

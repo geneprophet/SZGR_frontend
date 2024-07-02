@@ -685,8 +685,8 @@ export default function Page(props: any) {
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Method</strong>,
-      key: 'method',
-      dataIndex: 'method',
+      key: 'stat',
+      dataIndex: 'stat',
       ellipsis: true,
       search: false,
       sorter: true,

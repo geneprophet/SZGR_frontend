@@ -291,9 +291,9 @@ export default function Page() {
       <Row>
         <Col xs={4} sm={4} md={4}>
           <Anchor targetOffset={targetOffset} onChange={onChange}>
-            <Link href="#introduction" title="1. Introduction" onChange={onChange}></Link>
-            <Link href="#data collection" title="2. Data collection" onChange={onChange}></Link>
-            <Link href="#data analysis" title="3. Data analysis" onChange={onChange}></Link>
+            <Link href="#introduction" title="1. Introduction" ></Link>
+            <Link href="#data collection" title="2. Data collection" ></Link>
+            <Link href="#data analysis" title="3. Data analysis"></Link>
               <Link
                 href="#annotation"
                 title={
@@ -351,7 +351,7 @@ export default function Page() {
                 })}
               />
               <Link
-                href="#integration analysis"
+                href="#browse-gene"
                 title={
                   <div>
                     <p>4.3 Browse-gene</p>
@@ -361,7 +361,7 @@ export default function Page() {
                   [styles.hide]: !current.startsWith('#database usage'),
                 })}
               />
-			  <Link
+			        <Link
                 href="#advance"
                 title={
                   <div>
@@ -372,7 +372,7 @@ export default function Page() {
                   [styles.hide]: !current.startsWith('#database usage'),
                 })}
               />
-			  <Link
+			      <Link
                 href="#toolkit"
                 title={
                   <div>
@@ -394,7 +394,7 @@ export default function Page() {
                   [styles.hide]: !current.startsWith('#database usage'),
                 })}
               />
-            <Link href="#licenses" title="5. Licenses" onChange={onChange} />
+            <Link href="#licenses" title="5. Licenses" />
           </Anchor>
         </Col>
         <Col
@@ -486,71 +486,79 @@ export default function Page() {
               <Title level={2}>
                 4.1 Search
               </Title>
-              <Image src={usage_1} preview={false}></Image>
+
               <Paragraph>
                Home: The search function provided on the homepage supports quick query of projects in various forms based on keywords, such as mutation name, position or gene symbol.
               </Paragraph>
-              <Image src={usage_2} preview={false}></Image>
+              <Image src={usage_1} preview={false}></Image>
+
               <Paragraph>
                 Variant view: This view can be accessed by searching for a variant or clicking on a variant contained in another page. The variant view contains the curated variant-schizophrenia association information, 1000 Genomes frequency, effect prediction results, target genes, and experimental validation.
               </Paragraph>
-              <Image src={usage_3} preview={false}></Image>
+              <Image src={usage_2} preview={false}></Image>
+
 			  <Paragraph>
                 Location view: this page shows all curated variants in the searched location. Users can click on the interested variant to enter the variant view for detailed information.
               </Paragraph>
-              <Image src={usage_4} preview={false}></Image>
+              <Image src={usage_3} preview={false}></Image>
+
 			  <Paragraph>
                 Gene view: This view can be accessed by searching for a gene or clicking on a gene contained in another page. This page contains curated schizophrenia-gene association information, experimental evidence, functional annotations based on single-cell omics data and drug repositioning results.
               </Paragraph>
+              <Image src={usage_4} preview={false}></Image>
             </div>
             <div id={'browse-variant'}>
               <Title level={2}>
                 4.2 Browse-variant
               </Title>
-              <Image src={usage_5} preview={false}></Image>
+
               <Paragraph>
                 This page shows all variants associated with schizophrenia that we curated from the publications, including CV, RV, SV, CNV and DNM.
               </Paragraph>
+              <Image src={usage_5} preview={false}></Image>
             </div>
             <div id={'browse-gene'}>
               <Title level={2}>
                 4.3 Browse-gene
               </Title>
-              <Image src={usage_6} preview={false}></Image>
+
               <Paragraph>
                 This page shows the lines of evidence for schizophrenia-associated genes that we curated from the publications, presented according to the method of identification.
               </Paragraph>
+              <Image src={usage_6} preview={false}></Image>
             </div>
             <div id={'advance'}>
               <Title level={2}>
                 4.4	Advance
               </Title>
-              <Image src={usage_7} preview={false}></Image>
+
               <Paragraph>
                 This page contains further analysis results of variants and genes, like assessments of the reproducibility of evidence from in silico methods and biological experiments, scRNA-seq analysis results, and target information for drugs.
               </Paragraph>
+              <Image src={usage_7} preview={false}></Image>
             </div>
             <div id={'toolkit'}>
               <Title level={2}>
                 4.5	Toolkit
               </Title>
-              <Image src={usage_8} preview={false}></Image>
+
               <Paragraph>
                 Here we provide two user-friendly online analysis tools that can perform cell type-specific enrichment analysis and co-expression network analysis based on single-cell datasets.
               </Paragraph>
+              <Image src={usage_8} preview={false}></Image>
             </div>
             <div id={'resource'}>
               <Title level={2}>
                 4.6	Resource
               </Title>
-              <Image src={usage_9} preview={false}></Image>
               <Paragraph>
                 We have organized the core data of SZGR and provided a user-friendly download interface.
               </Paragraph>
+              <Image src={usage_9} preview={false}></Image>
             </div>
             </div>
          <div id={'licenses'}>
-            <Title level={1}>5. Licenses</Title>
+           <Title level={1}>5. Licenses</Title>
             <Paragraph>
               SZGR is free for academic use only. For any commercial use, please contact us for commercial licensing terms.
             </Paragraph>
