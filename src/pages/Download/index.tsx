@@ -50,20 +50,19 @@ export default function Page() {
 
   const columns = [
     {
-      title: 'Description',
+      title: <strong>Description</strong>,
       dataIndex: 'description',
       key: 'description',
       width: 300,
-      // className:'kkk',
     },
     {
-      title: 'File Size',
+      title: <strong>File Size</strong>,
       dataIndex: 'size',
       key: 'size',
       width: 300,
     },
     {
-      title: 'URL',
+      title: <strong>URL</strong>,
       dataIndex: 'url',
       key: 'url',
       render: (text: string, record: any) => (

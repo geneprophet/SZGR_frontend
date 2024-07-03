@@ -253,27 +253,28 @@ export default function Page() {
 
   const columns = [
     {
-      title: 'Data type',
+      title: <strong>Data Type</strong>,
       dataIndex: 'datatype',
       key: 'datatype',
+      width: 150,
     },
     {
-      title: 'Subtype',
+      title: <strong>Subtype</strong>,
       dataIndex: 'subtype',
       key: 'subtype',
       width: 600,
     },
     {
-      title: 'Number of items',
+      title: <strong>Number of items</strong>,
       dataIndex: 'item',
       key: 'item',
       width: 600,
     },
     {
-      title: 'Number of publications',
+      title: <strong>Number of publications</strong>,
       dataIndex: 'publication',
       key: 'publication',
-      width: 600,
+      width: 500,
     },
   ];
 
