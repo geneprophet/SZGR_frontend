@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import styles from './index.less';
-import { getRemoteVariant, getRemoteVariantLike, getRemoteVariantlocus } from "@/pages/VariantOverview/service";
+import {
+  getRemoteVariant,
+  getRemoteVariantLike,
+  getRemoteVariantlocus,
+} from '@/pages/VariantOverview/service';
 import { ApartmentOutlined, SearchOutlined } from '@ant-design/icons';
 import { Parser } from 'json2csv';
 // @ts-ignore
-import { URL_PREFIX,uniqueArray,IMG_PREFIX } from '@/common/constants';
+import { URL_PREFIX, uniqueArray, IMG_PREFIX } from '@/common/constants';
 import {
   Breadcrumb,
   Col,
@@ -16,21 +20,18 @@ import {
   Typography,
   Image,
 } from 'antd';
-const {Title} = Typography;
-import { ProColumns, ProTable } from "@ant-design/pro-table";
-import {
-  AnalysisIcon
-} from "../../components/Icons/index";
-import { pop } from "echarts/types/src/component/dataZoom/history";
+const { Title } = Typography;
+import { ProColumns, ProTable } from '@ant-design/pro-table';
+import { AnalysisIcon } from '../../components/Icons/index';
+import { pop } from 'echarts/types/src/component/dataZoom/history';
 import {
   getRemoteGeneadvance,
   getRemoteGeneadvancelike,
   getRemoteVariantadvance,
-  getRemoteVariantadvanceLike
-} from "@/pages/Advance/service";
+  getRemoteVariantadvanceLike,
+} from '@/pages/Advance/service';
 import { Tabs } from 'antd';
-import { getRemoteGenedrug } from "@/pages/ExploreGene/service";
-
+import { getRemoteGenedrug } from '@/pages/ExploreGene/service';
 
 export default function Page(props: any) {
   const [variants, setVariants] = useState(undefined);
@@ -51,7 +52,6 @@ export default function Page(props: any) {
   const [pagesize3, setPagesize3] = useState(10);
   const [pageindex3, setPageindex3] = useState(1);
 
-
   interface SearchKeywords {
     vid: string | undefined;
     gene: string | undefined;
@@ -61,27 +61,26 @@ export default function Page(props: any) {
 
   const [keywords, setKeywords] = useState<SearchKeywords>({});
 
-
   useEffect(() => {
     getRemoteVariantadvance({
-          pageSize: pagesize,
-          pageIndex: pageindex,
-          vid: undefined,
-          sort_field:undefined,
-          sort_direction:undefined
-        }).then((res) => {
-          setLoading(false);
-          setVariants(res.data);
-          setTotal(res.meta.total);
-        });
+      pageSize: pagesize,
+      pageIndex: pageindex,
+      vid: undefined,
+      sort_field: undefined,
+      sort_direction: undefined,
+    }).then((res) => {
+      setLoading(false);
+      setVariants(res.data);
+      setTotal(res.meta.total);
+    });
   }, []);
   useEffect(() => {
     getRemoteGeneadvance({
       pageSize: pagesize2,
       pageIndex: pageindex2,
       gene: undefined,
-      sort_field:undefined,
-      sort_direction:undefined
+      sort_field: undefined,
+      sort_direction: undefined,
     }).then((res) => {
       setLoading2(false);
       setGenes(res.data);
@@ -133,8 +132,8 @@ export default function Page(props: any) {
                 pageSize: 100,
                 pageIndex: 1,
                 vid: undefined,
-                sort_field:undefined,
-                sort_direction:undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -151,8 +150,8 @@ export default function Page(props: any) {
                 pageSize: 100,
                 pageIndex: 1,
                 vid: value,
-                sort_field:undefined,
-                sort_direction:undefined
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -180,9 +179,7 @@ export default function Page(props: any) {
             href={URL_PREFIX + '/explorevariant/' + record.vid}
             target={'_blank'}
           >
-            <Space>
-              {record.vid}
-            </Space>
+            <Space>{record.vid}</Space>
           </a>
         </span>
       ),
@@ -194,7 +191,7 @@ export default function Page(props: any) {
       ellipsis: true,
       sorter: true,
       search: false,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Start</strong>,
@@ -203,7 +200,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>End</strong>,
@@ -212,7 +209,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Gene</strong>,
@@ -221,7 +218,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:150,
+      width: 150,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>caQTL</strong>,
@@ -230,7 +227,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:150,
+      width: 150,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>eQTL</strong>,
@@ -239,7 +236,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:150,
+      width: 150,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>haQTL</strong>,
@@ -248,7 +245,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>meQTL</strong>,
@@ -257,7 +254,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>pQTL</strong>,
@@ -266,16 +263,16 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:150,
+      width: 150,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>mpra</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>MPRA</strong>,
       key: 'mpra',
       dataIndex: 'mpra',
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>CRISPR</strong>,
@@ -284,7 +281,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>Score</strong>,
@@ -293,8 +290,8 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
-    }
+      width: 100,
+    },
   ];
   const columns2 = [
     {
@@ -322,8 +319,8 @@ export default function Page(props: any) {
                 pageSize: 100,
                 pageIndex: 1,
                 gene: undefined,
-                sort_field:undefined,
-                sort_direction:undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -340,8 +337,8 @@ export default function Page(props: any) {
                 pageSize: 100,
                 pageIndex: 1,
                 gene: value,
-                sort_field:undefined,
-                sort_direction:undefined
+                sort_field: undefined,
+                sort_direction: undefined,
               });
               if (remoteKeywords) {
                 const nameList = new Set();
@@ -369,9 +366,7 @@ export default function Page(props: any) {
             href={URL_PREFIX + '/exploregene/' + record.gene}
             target={'_blank'}
           >
-            <Space>
-              {record.gene}
-            </Space>
+            <Space>{record.gene}</Space>
           </a>
         </span>
       ),
@@ -383,7 +378,7 @@ export default function Page(props: any) {
       ellipsis: true,
       sorter: true,
       search: false,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>TWAS</strong>,
@@ -392,7 +387,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>EWAS</strong>,
@@ -401,7 +396,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>eQTL</strong>,
@@ -410,7 +405,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:150,
+      width: 150,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>meQTL</strong>,
@@ -419,7 +414,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>CRISPR</strong>,
@@ -428,7 +423,7 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
+      width: 100,
     },
     {
       title: <strong style={{ fontFamily: 'sans-serif' }}>CRISPR Hit</strong>,
@@ -439,7 +434,9 @@ export default function Page(props: any) {
       sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>CRISPR Hit Target</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>CRISPR Hit Target</strong>
+      ),
       key: 'crispr_hit_targets',
       dataIndex: 'crispr_hit_targets',
       ellipsis: true,
@@ -447,7 +444,9 @@ export default function Page(props: any) {
       sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Other Expriments</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>Other Expriments</strong>
+      ),
       key: 'other_expriments',
       dataIndex: 'other_expriments',
       ellipsis: true,
@@ -461,8 +460,8 @@ export default function Page(props: any) {
       ellipsis: true,
       search: false,
       sorter: true,
-      width:100,
-    }
+      width: 100,
+    },
   ];
   const columns3 = [
     {
@@ -475,7 +474,7 @@ export default function Page(props: any) {
       sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Ensemble ID</strong>,
+      title: <strong style={{ fontFamily: 'sans-serif' }}>Ensembl ID</strong>,
       key: 'ensemble',
       dataIndex: 'ensemble',
       ellipsis: true,
@@ -508,7 +507,9 @@ export default function Page(props: any) {
     },
     {
       title: (
-        <strong style={{ fontFamily: 'sans-serif' }}>Maximum Clinical Trial Phase</strong>
+        <strong style={{ fontFamily: 'sans-serif' }}>
+          Maximum Clinical Trial Phase
+        </strong>
       ),
       key: 'clinical_trail',
       dataIndex: 'clinical_trail',
@@ -534,7 +535,9 @@ export default function Page(props: any) {
       sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Max Phase for ind</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>Max Phase for ind</strong>
+      ),
       key: 'phase_ind',
       dataIndex: 'phase_ind',
       ellipsis: true,
@@ -550,7 +553,9 @@ export default function Page(props: any) {
       sorter: true,
     },
     {
-      title: <strong style={{ fontFamily: 'sans-serif' }}>Warning Class</strong>,
+      title: (
+        <strong style={{ fontFamily: 'sans-serif' }}>Warning Class</strong>
+      ),
       key: 'warning',
       dataIndex: 'warning',
       ellipsis: true,
@@ -577,7 +582,9 @@ export default function Page(props: any) {
     },
     {
       title: (
-        <strong style={{ fontFamily: 'sans-serif' }}>Mechanism of Action</strong>
+        <strong style={{ fontFamily: 'sans-serif' }}>
+          Mechanism of Action
+        </strong>
       ),
       key: 'mechanism_action',
       dataIndex: 'mechanism_action',
@@ -614,9 +621,7 @@ export default function Page(props: any) {
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <a href="">
-                <strong style={{ fontFamily: 'sans-serif' }}>
-                  Advance
-                </strong>
+                <strong style={{ fontFamily: 'sans-serif' }}>Advance</strong>
               </a>
             </Breadcrumb.Item>
           </Breadcrumb>
@@ -624,7 +629,7 @@ export default function Page(props: any) {
       </Row>
       <Divider />
       <Row>
-        <Title level={3}>Variants Score</Title>
+        <Title level={3}>Variant Score</Title>
       </Row>
       <Row justify={'center'}>
         <Col md={24}>
@@ -658,9 +663,9 @@ export default function Page(props: any) {
               getRemoteVariantadvance({
                 pageSize: pagesize,
                 pageIndex: 1,
-                vid:keywords.vid,
-                sort_field:undefined,
-                sort_direction:undefined
+                vid: keywords.vid,
+                sort_field: undefined,
+                sort_direction: undefined,
               }).then((res) => {
                 setVariants(res.data);
                 setLoading(false);
@@ -672,9 +677,9 @@ export default function Page(props: any) {
               getRemoteVariantadvance({
                 pageSize: 10,
                 pageIndex: 1,
-                vid:undefined,
-                sort_field:undefined,
-                sort_direction:undefined
+                vid: undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
               }).then((res) => {
                 setVariants(res.data);
                 setLoading(false);
@@ -691,17 +696,17 @@ export default function Page(props: any) {
               setKeywords({ ...keywords, sort_field: sorter.field });
               setKeywords({ ...keywords, sort_direction: sorter.order });
               setLoading(true);
-                getRemoteVariantadvance({
-                  pageSize: pagination.pageSize,
-                  pageIndex: pagination.current,
-                  vid:keywords.vid,
-                  sort_field: sorter.field,
-                  sort_direction: sorter.order,
-                }).then((res) => {
-                  setVariants(res.data);
-                  setLoading(false);
-                  setTotal(res.meta.total);
-                });
+              getRemoteVariantadvance({
+                pageSize: pagination.pageSize,
+                pageIndex: pagination.current,
+                vid: keywords.vid,
+                sort_field: sorter.field,
+                sort_direction: sorter.order,
+              }).then((res) => {
+                setVariants(res.data);
+                setLoading(false);
+                setTotal(res.meta.total);
+              });
             }}
           />
         </Col>
@@ -742,9 +747,9 @@ export default function Page(props: any) {
               getRemoteGeneadvance({
                 pageSize: pagesize,
                 pageIndex: 1,
-                gene:keywords.gene,
-                sort_field:undefined,
-                sort_direction:undefined
+                gene: keywords.gene,
+                sort_field: undefined,
+                sort_direction: undefined,
               }).then((res) => {
                 setGenes(res.data);
                 setLoading2(false);
@@ -756,9 +761,9 @@ export default function Page(props: any) {
               getRemoteGeneadvance({
                 pageSize: 10,
                 pageIndex: 1,
-                gene:undefined,
-                sort_field:undefined,
-                sort_direction:undefined
+                gene: undefined,
+                sort_field: undefined,
+                sort_direction: undefined,
               }).then((res) => {
                 setGenes(res.data);
                 setLoading2(false);
@@ -778,7 +783,7 @@ export default function Page(props: any) {
               getRemoteGeneadvance({
                 pageSize: pagination.pageSize,
                 pageIndex: pagination.current,
-                gene:keywords.gene,
+                gene: keywords.gene,
                 sort_field: sorter.field,
                 sort_direction: sorter.order,
               }).then((res) => {
@@ -790,7 +795,7 @@ export default function Page(props: any) {
           />
         </Col>
       </Row>
-      <Divider/>
+      <Divider />
       <Row>
         <Title level={3}>Single Cell</Title>
       </Row>
@@ -802,140 +807,350 @@ export default function Page(props: any) {
             {
               label: `Cerebellum`,
               key: 'cerebellum',
-              children:
+              children: (
                 <Row justify={'space-around'}>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/draw_graph_fa_celltypes.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_age.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX + 'advance/' + key + '/draw_graph_fa_age.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__celltype_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__celltype_top5_heg.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__age_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__age_top5_heg.png'
+                      }
+                    />
                   </Col>
-                </Row>,
+                </Row>
+              ),
             },
             {
               label: `Fetal Forebrain`,
               key: 'fetal_forebrain',
-              children:
+              children: (
                 <Row justify={'space-around'}>
-                <Col md={12}>
-                  <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_celltypes.png' } />
-                </Col>
-                <Col md={12}>
-                  <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_age.png' } />
-                </Col>
-                <Col md={12}>
-                  <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__celltype_top5_heg.png' } />
-                </Col>
-                <Col md={12}>
-                  <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__age_top5_heg.png' } />
-                </Col>
-              </Row>,
+                  <Col md={12}>
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/draw_graph_fa_celltypes.png'
+                      }
+                    />
+                  </Col>
+                  <Col md={12}>
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX + 'advance/' + key + '/draw_graph_fa_age.png'
+                      }
+                    />
+                  </Col>
+                  <Col md={12}>
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__celltype_top5_heg.png'
+                      }
+                    />
+                  </Col>
+                  <Col md={12}>
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__age_top5_heg.png'
+                      }
+                    />
+                  </Col>
+                </Row>
+              ),
             },
             {
               label: `Ganglionic Eminences and Cortex`,
               key: 'ganglionic_eminences_and_cortex',
-              children:
+              children: (
                 <Row justify={'space-around'}>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/draw_graph_fa_celltypes.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_age.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX + 'advance/' + key + '/draw_graph_fa_age.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__celltype_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__celltype_top5_heg.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__age_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__age_top5_heg.png'
+                      }
+                    />
                   </Col>
-                </Row>,
+                </Row>
+              ),
             },
             {
               label: `Hippocampal-Entorhinal System`,
               key: 'hippocampal-entorhinal_system',
-              children:
+              children: (
                 <Row justify={'space-around'}>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/draw_graph_fa_celltypes.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_age.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX + 'advance/' + key + '/draw_graph_fa_age.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__celltype_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__celltype_top5_heg.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__age_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__age_top5_heg.png'
+                      }
+                    />
                   </Col>
-                </Row>,
+                </Row>
+              ),
             },
             {
               label: `Hippocampus`,
               key: 'hippocampus',
-              children:
+              children: (
                 <Row justify={'space-around'}>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/draw_graph_fa_celltypes.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_age.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX + 'advance/' + key + '/draw_graph_fa_age.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__celltype_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__celltype_top5_heg.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__age_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__age_top5_heg.png'
+                      }
+                    />
                   </Col>
-                </Row>,
+                </Row>
+              ),
             },
             {
               label: `Neocortex`,
               key: 'neocortex',
-              children:
+              children: (
                 <Row justify={'space-around'}>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/draw_graph_fa_celltypes.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_age.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX + 'advance/' + key + '/draw_graph_fa_age.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__celltype_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__celltype_top5_heg.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__age_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__age_top5_heg.png'
+                      }
+                    />
                   </Col>
-                </Row>,
+                </Row>
+              ),
             },
             {
               label: `Prefrontal Cortex in Schizophrenia Subjects`,
               key: 'prefrontal_cortex_in_schizophrenia_subjects',
-              children:
+              children: (
                 <Row justify={'space-around'}>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_celltypes.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/draw_graph_fa_celltypes.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/draw_graph_fa_age.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX + 'advance/' + key + '/draw_graph_fa_age.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__celltype_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__celltype_top5_heg.png'
+                      }
+                    />
                   </Col>
                   <Col md={12}>
-                    <Image width={'90%'} src={IMG_PREFIX + 'advance/' + key +'/stacked_violin__age_top5_heg.png' } />
+                    <Image
+                      width={'90%'}
+                      src={
+                        IMG_PREFIX +
+                        'advance/' +
+                        key +
+                        '/stacked_violin__age_top5_heg.png'
+                      }
+                    />
                   </Col>
-                </Row>,
+                </Row>
+              ),
             },
           ]}
         />
       </Row>
-      <Divider/>
+      <Divider />
       <Row>
         <Title level={3}>Drug Annotation</Title>
       </Row>

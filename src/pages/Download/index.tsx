@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.less';
-import { Breadcrumb, Col, Row, Table } from "antd";
-import { URL_PREFIX,uniqueArray,IMG_PREFIX } from '@/common/constants';
+import { Breadcrumb, Col, Divider, Row, Table } from 'antd';
+import { URL_PREFIX, uniqueArray, IMG_PREFIX } from '@/common/constants';
 export default function Page() {
   const dataSource = [
     {
@@ -53,13 +53,14 @@ export default function Page() {
       title: 'Description',
       dataIndex: 'description',
       key: 'description',
-      width:300,
+      width: 300,
+      // className:'kkk',
     },
     {
       title: 'File Size',
       dataIndex: 'size',
       key: 'size',
-      width:300,
+      width: 300,
     },
     {
       title: 'URL',
@@ -69,7 +70,7 @@ export default function Page() {
         <a href={record.url} target={'_blank'}>
           {record.url}
         </a>
-      )
+      ),
     },
   ];
 
@@ -85,17 +86,21 @@ export default function Page() {
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <a href="">
-                <strong style={{ fontFamily: 'sans-serif' }}>
-                  Resource
-                </strong>
+                <strong style={{ fontFamily: 'sans-serif' }}>Resource</strong>
               </a>
             </Breadcrumb.Item>
           </Breadcrumb>
         </Col>
       </Row>
+      <Divider />
       <Row justify={'center'}>
         <Col md={20}>
-          <Table dataSource={dataSource} columns={columns} bordered={true} pagination={false} />
+          <Table
+            dataSource={dataSource}
+            columns={columns}
+            bordered={true}
+            pagination={false}
+          />
         </Col>
       </Row>
     </div>

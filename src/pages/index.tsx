@@ -87,7 +87,7 @@ export default function IndexPage() {
   };
 
   const data = [
-    'June 28, 2024: we released SZGR 3.0.',
+    'June 28, 2024: We released SZGR 3.0.',
     'June 27, 2016: SZGR was renamed to SZGR 2.0.',
     'June 2016, SZGR has passed the screen and is officially online through The University of Texas Health Science Center at Houston.',
     'March 2016, SZGR in our Vanderbilt server was temporally shutdown due to our lab move to the University of Texas.',
@@ -98,7 +98,10 @@ export default function IndexPage() {
     <div>
       <Row justify="center" style={{ background: '#BED7DC' }}>
         <Title level={2} className={styles.introduction}>
-          SZGR: <Text underline={true}>S</Text>chi<Text underline={true}>Z</Text>ophrenia <Text underline={true}>G</Text>ene <Text underline={true}>R</Text>esource
+          SZGR: <Text underline={true}>S</Text>chi
+          <Text underline={true}>Z</Text>ophrenia{' '}
+          <Text underline={true}>G</Text>ene <Text underline={true}>R</Text>
+          esource (Version 3.0)
         </Title>
       </Row>
       <Divider />
